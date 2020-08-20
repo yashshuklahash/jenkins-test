@@ -28,7 +28,7 @@ pipeline {
         
         stage('Production Stage') {
             steps {
-                sh 'Production Stage'
+                sh 'echo "this is a Production Stage"'
             }
         }
     }
