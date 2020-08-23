@@ -3,6 +3,10 @@ pipeline {
      options {
         skipStagesAfterUnstable()
     }
+    environment {
+        def config = readJSON file: 'app.json'
+        baseUrl = "${config}"
+    }
     stages {
         /* "Build" and "Test" stages omitted */
 
@@ -15,12 +19,8 @@ pipeline {
         stage('Build Stage') {
             steps {
                 sh 'ls -la'
-                environment
-                 {
-                name = readJSON file: 'app.json'
-                }
                 
-                echo name
+                echo config
                 
                 sh 'echo "this is a build stage"'
                 input "Does the staging environment look ok?"
