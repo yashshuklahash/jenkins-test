@@ -16,7 +16,7 @@ pipeline {
             steps {
                 sh 'ls -la'
                 script{
-                name = readJSON file: 'app.json'
+                def name = readJSON file: 'app.json'
                 sh 'echo $name'
                 }
                 sh 'echo "this is a build stage"'
