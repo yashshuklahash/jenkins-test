@@ -21,13 +21,27 @@ pipeline {
             }
         }
         
+        stage ('Configure Pipeline Job')
+        {
+            input {
+            message "Should we continue?"
+            ok "Yes, do it!"
+            parameters {
+                string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' ) ,
+                string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' ) ,
+                string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )
+            }
+           
+            }
+        }
+        
         stage('Build Stage') {
             steps {
-                script {
+               // script {
   
                    // env.PROJECT_NAME = input message: 'Please enter the project name ', ok: 'Validate!',
-                        parameters: [string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )]
-                }
+                      //  parameters: [string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )]
+               // }
                 sh 'ls -la'
                 
                 echo PROJECT_NAME
