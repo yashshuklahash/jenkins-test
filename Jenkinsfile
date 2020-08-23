@@ -15,8 +15,9 @@ pipeline {
         stage('Build Stage') {
             steps {
                 sh 'ls -la'
-                script {
-                def name = readJSON file: 'app.json'
+                script
+                 {
+                export name = readJSON file: 'app.json'
                 }
                 sh 'echo $name'
                 
