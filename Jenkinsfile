@@ -24,11 +24,14 @@ pipeline {
         stage('Build Stage') {
             steps {
                 script {
-                    parameter : string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )
+                    parameter : 
+                    
+                    env.PROJECT_NAME = input message: 'Please enter the project name ', ok: 'Validate!',
+                        parameters: [string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )]
                 }
                 sh 'ls -la'
                 
-                echo project
+                echo PROJECT_NAME
                 echo author
                 echo s3
                 echo app
