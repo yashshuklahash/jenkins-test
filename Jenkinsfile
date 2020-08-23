@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
   
-                    env.PROJECT_NAME = input message: 'Please enter the project name ', ok: 'Validate!',
+                   // env.PROJECT_NAME = input message: 'Please enter the project name ', ok: 'Validate!',
                         parameters: [string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )]
                 }
                 sh 'ls -la'
