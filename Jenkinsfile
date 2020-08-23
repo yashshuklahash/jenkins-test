@@ -1,9 +1,6 @@
 pipeline {
     agent any
     
-    options{
-        
-    }
 
     environment {
         def config = readJSON file: 'app.json'
