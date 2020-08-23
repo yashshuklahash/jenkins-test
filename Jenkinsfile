@@ -15,7 +15,7 @@ pipeline {
     string(name: 'Project Name', defaultValue: project , description: 'Enter your project name : ' )
    ])
        
-       skipStagesAfterUnstable()
+    
    ]) 
     
 
