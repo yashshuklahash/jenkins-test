@@ -1,7 +1,7 @@
 {
-  "Project Name" : "Test Project" ,
+  "Project_Name" : "Test Project" ,
   "Author" : "yash" ,
-  "S3 Bucket" : "test_bucket" ,
+  "S3_Bucket" : "test_bucket" ,
   "API" : "test API" ,
   "Application" : "test App"
 }
