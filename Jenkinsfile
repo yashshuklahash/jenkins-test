@@ -24,16 +24,11 @@ pipeline {
         stage('Configure Pipeline Job')
         {
             steps{
-            input {
-            message "Should we continue?"
-            ok "Yes, do it!"
-            parameters {
-                string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' ) 
-                string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )
-                string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )
-            }
-            }
-            }
+                input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
+                    parameters: [string(name: 'Project_Name', defaultValue: env.project , description: 'Enter your project name : ' ) ,
+                                string(name: 'Author', defaultValue: env.author , description: 'Enter your project name : ' ) ,
+                                string(name: 'S3_Bucket_URL', defaultValue: env.project , description: 'Enter your project name : ' )]
+            
         }
         
         stage('Build Stage') {
@@ -46,8 +41,8 @@ pipeline {
                 sh 'ls -la'
                 
                 echo PROJECT_NAME
-                echo author
-                echo s3
+                echo Author
+                echo S3_Bucket_URL
                 echo app
                 echo api
                 
