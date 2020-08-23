@@ -1,8 +1,6 @@
 pipeline {
     agent any
-     options {
-        skipStagesAfterUnstable()
-    }
+
     environment {
         def config = readJSON file: 'app.json'
         project = "${config.Project_Name}"
@@ -12,10 +10,12 @@ pipeline {
         api = "${config.API}"
     }
    
-   properties([
+   options([
    parameters([
     string(name: 'Project Name', defaultValue: project , description: 'Enter your project name : ' )
    ])
+       
+       skipStagesAfterUnstable()
    ]) 
     
 
