@@ -35,10 +35,11 @@ pipeline {
         }
         
         stage('Build Stage') {
-            steps {                
-                echo configuration.Project_Name
-                echo configuration.Author
-                echo configuration.S3_Bucket_URL
+            steps {    
+                echo configuration
+                echo configuration['Project_Name']
+                echo configuration['Author']
+                echo configuration['S3_Bucket_URL']
                 sh 'echo "this is a build stage"'
             }
         }
