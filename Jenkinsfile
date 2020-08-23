@@ -21,7 +21,7 @@ pipeline {
             }
         }
         
-        stage ('Configure Pipeline Job')
+        stage('Configure Pipeline Job')
         {
             input {
             message "Should we continue?"
