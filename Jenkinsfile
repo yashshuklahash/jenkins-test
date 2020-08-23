@@ -27,8 +27,8 @@ pipeline {
             message "Should we continue?"
             ok "Yes, do it!"
             parameters {
-                string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' ) ,
-                string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' ) ,
+                string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' ) 
+                string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )
                 string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )
             }
            
