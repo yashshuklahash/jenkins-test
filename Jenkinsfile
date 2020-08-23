@@ -30,6 +30,7 @@ pipeline {
                                 string(name: 'S3_Bucket_URL', defaultValue: env.project , description: 'Enter your project name : ' )]
             
         }
+        }
         
         stage('Build Stage') {
             steps {
