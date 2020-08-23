@@ -36,12 +36,9 @@ pipeline {
         
         stage('Build Stage') {
             steps {                
-                echo configuration
-                echo Author
-                echo S3_Bucket_URL
-                echo app
-                echo api
-                
+                echo configuration.Project_Name
+                echo configuration.Author
+                echo configuration.S3_Bucket_URL
                 sh 'echo "this is a build stage"'
             }
         }
