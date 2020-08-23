@@ -1,7 +1,7 @@
 {
   "Project_Name" : "Test Project" ,
   "Author" : "yash" ,
-  "S3_Bucket" : "test_bucket" ,
+  "S3_Bucket" : "s3://test_bucket/" ,
   "API" : "test API" ,
   "Stage" : "Prod" ,
   "HA" : "true" ,
