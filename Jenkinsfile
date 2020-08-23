@@ -33,7 +33,7 @@ pipeline {
                                  string(name: 'author', defaultValue: env.author , description: 'Enter script author name : ' ) ,
                                  string(name: 's3', defaultValue: env.S3_Bucket , description: 'Enter S3 bucket URL : ' )   ,
                                  string(name: 'api', defaultValue: env.API , description: 'Enter api endpoint : ' )  ,
-                                 choice(name: 'stage', defaultValue: env.stage , choices: env.stage_choice , description: 'Enter stage to deploy to : ' )
+                                 choice(name: 'stage', defaultValue: env.stage , choices: env.stage_choice , description: 'Enter stage to deploy to : ' ),
                                  booleanParam(name: 'HA', defaultValue: env.highavailable , description: 'deploy in High Availability ? ' )]
                 
                 env.Project_Name = configuration.name
