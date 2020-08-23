@@ -15,11 +15,12 @@ pipeline {
         stage('Build Stage') {
             steps {
                 sh 'ls -la'
-                script
+                environment
                  {
-                export name = readJSON file: 'app.json'
+                name = readJSON file: 'app.json'
                 }
-                sh 'echo $name'
+                
+                echo name
                 
                 sh 'echo "this is a build stage"'
                 input "Does the staging environment look ok?"
