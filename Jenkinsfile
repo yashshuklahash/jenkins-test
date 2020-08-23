@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    
+    options{
+        
+    }
 
     environment {
         def config = readJSON file: 'app.json'
@@ -10,7 +14,11 @@ pipeline {
         api = "${config.API}"
     }
 
+    parameters {
+        string(name: 'PERSON', defaultValue: env.project , description: 'Who should I say hello to?')
 
+        text(name: 'BIOGRAPHY', defaultValue: env.s3 , description: 'Enter some information about the person')
+    }
     
     stages {
         /* "Build" and "Test" stages omitted */
