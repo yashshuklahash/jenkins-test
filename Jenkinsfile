@@ -5,7 +5,11 @@ pipeline {
     }
     environment {
         def config = readJSON file: 'app.json'
-        baseUrl = "${config}"
+        project = "${config.Project_Name}"
+        author = "${config.Project_Name}"
+        s3 = "${config.S3_Bucket}"
+        app = "${config.Application}"
+        api = "${config.API}"
     }
     stages {
         /* "Build" and "Test" stages omitted */
@@ -20,7 +24,11 @@ pipeline {
             steps {
                 sh 'ls -la'
                 
-                echo config
+                echo project
+                echo author
+                echo s3
+                echo app
+                echo api
                 
                 sh 'echo "this is a build stage"'
                 input "Does the staging environment look ok?"
