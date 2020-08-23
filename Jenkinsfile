@@ -14,20 +14,18 @@ pipeline {
     
     stages {
         /* "Build" and "Test" stages omitted */
-
         stage('Checkout Stage') {
             steps {
                 sh 'echo "this is a checkout stage"'
                 checkout scm
             }
         }
+        
         stage('Build Stage') {
-                
-
             steps {
-                parameters {
-        string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )
-    }
+                script {
+                    parameter : string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )
+                }
                 sh 'ls -la'
                 
                 echo project
