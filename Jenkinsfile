@@ -1,7 +1,10 @@
 pipeline {
     agent any
     
-
+    options {
+    skipStagesAfterUnstable()
+    }
+    
     environment {
         def config = readJSON file: 'app.json'
         project = "${config.Project_Name}"
@@ -10,15 +13,9 @@ pipeline {
         app = "${config.Application}"
         api = "${config.API}"
     }
-
-    parameters {
-        string(name: 'PERSON', defaultValue: env.project , description: 'Who should I say hello to?')
-
-        text(name: 'BIOGRAPHY', defaultValue: env.s3 , description: 'Enter some information about the person')
-    }
     
     stages {
-        /* "Build" and "Test" stages omitted */
+        
         stage('Checkout Stage') {
             steps {
                 sh 'echo "this is a checkout stage"'
@@ -26,8 +23,7 @@ pipeline {
             }
         }
         
-        stage('Configure Pipeline Job')
-        {
+        stage('Configure Pipeline Job'){
             steps{
                 script {
                 env.configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
@@ -39,14 +35,7 @@ pipeline {
         }
         
         stage('Build Stage') {
-            steps {
-               // script {
-  
-                   // env.PROJECT_NAME = input message: 'Please enter the project name ', ok: 'Validate!',
-                      //  parameters: [string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )]
-               // }
-                sh 'ls -la'
-                
+            steps {                
                 echo configuration
                 echo Author
                 echo S3_Bucket_URL
@@ -54,13 +43,12 @@ pipeline {
                 echo api
                 
                 sh 'echo "this is a build stage"'
-                input "Does the staging environment look ok?"
             }
         }
         
         stage('Approval !! ') {
             steps {
-                input "Does the staging environment look ok?"
+                input "Deploy the code?"
             }
         }
         
