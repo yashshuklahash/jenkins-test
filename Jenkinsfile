@@ -6,11 +6,16 @@ pipeline {
     environment {
         def config = readJSON file: 'app.json'
         project = "${config.Project_Name}"
-        author = "${config.Project_Name}"
+        author = "${config.Author}"
         s3 = "${config.S3_Bucket}"
         app = "${config.Application}"
         api = "${config.API}"
     }
+    
+   parameters([
+    string(name: 'Project Name', defaultValue: project , description: 'Enter your project name : ' )
+   ])
+    
     stages {
         /* "Build" and "Test" stages omitted */
 
