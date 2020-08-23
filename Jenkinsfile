@@ -9,11 +9,7 @@ pipeline {
         app = "${config.Application}"
         api = "${config.API}"
     }
-   
-    options{
-        skipStagesAfterUnstable() 
-    }
-    
+
     parameters {
         string(name: 'Project Name', defaultValue: project , description: 'Enter your project name : ' )
     }
