@@ -10,9 +10,6 @@ pipeline {
         api = "${config.API}"
     }
 
-    parameters {
-        string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )
-    }
 
     
     stages {
@@ -25,6 +22,10 @@ pipeline {
             }
         }
         stage('Build Stage') {
+                parameters {
+        string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )
+    }
+
             steps {
                 sh 'ls -la'
                 
