@@ -23,6 +23,7 @@ pipeline {
         
         stage('Configure Pipeline Job')
         {
+            steps{
             input {
             message "Should we continue?"
             ok "Yes, do it!"
@@ -31,7 +32,7 @@ pipeline {
                 string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )
                 string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )
             }
-           
+            }
             }
         }
         
