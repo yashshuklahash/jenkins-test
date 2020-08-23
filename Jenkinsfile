@@ -22,11 +22,12 @@ pipeline {
             }
         }
         stage('Build Stage') {
+                
+
+            steps {
                 parameters {
         string(name: 'Project Name', defaultValue: env.project , description: 'Enter your project name : ' )
     }
-
-            steps {
                 sh 'ls -la'
                 
                 echo project
