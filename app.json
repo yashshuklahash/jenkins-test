@@ -1,1 +1,7 @@
-{ "name" : "yash" }
+{
+  "Project Name" : "Test Project" ,
+  "Author" : "yash" ,
+  "S3 Bucket" : "test_bucket" ,
+  "API" : "test API"
+  "Application" : "test App"
+}
