@@ -26,17 +26,20 @@ pipeline {
         stage('Configure Pipeline Job'){
             steps{
                 script {
-                env.configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
+                def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
                     parameters: [string(name: 'Project_Name', defaultValue: env.project , description: 'Enter your project name : ' ) ,
                                 string(name: 'Author', defaultValue: env.author , description: 'Enter your project name : ' ) ,
                                 string(name: 'S3_Bucket_URL', defaultValue: env.project , description: 'Enter your project name : ' )]
+                
+                env.namex = configuration.Project_Name
                 }
         }
         }
         
         stage('Build Stage') {
             steps {    
-                echo configuration
+                
+                echo env.namex 
                 echo env.configuration[Project_Name]
                 echo configuration['Author']
                 echo configuration['S3_Bucket_URL']
