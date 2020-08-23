@@ -3,5 +3,7 @@
   "Author" : "yash" ,
   "S3_Bucket" : "test_bucket" ,
   "API" : "test API" ,
-  "Application" : "test App"
+  "Stage" : "Prod" ,
+  "HA" : "true" ,
+  "Stage_choices" : "Dev\nTest\nPreprod\nProd"
 }
