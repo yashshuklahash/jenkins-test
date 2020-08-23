@@ -10,13 +10,13 @@ pipeline {
         api = "${config.API}"
     }
    
-   options([
+    options{
    parameters([
     string(name: 'Project Name', defaultValue: project , description: 'Enter your project name : ' )
    ])
        
     
-   ]) 
+    }
     
 
     
