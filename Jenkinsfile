@@ -11,10 +11,14 @@ pipeline {
         app = "${config.Application}"
         api = "${config.API}"
     }
-    
+   
+   properties([
    parameters([
     string(name: 'Project Name', defaultValue: project , description: 'Enter your project name : ' )
    ])
+   ]) 
+    
+
     
     stages {
         /* "Build" and "Test" stages omitted */
