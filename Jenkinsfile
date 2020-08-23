@@ -15,8 +15,8 @@ pipeline {
         stage('Build Stage') {
             steps {
                 sh 'ls -la'
-                //def props = readJSON file: 'app.json'
-               // sh 'echo $name'
+                def name = readJSON file: 'app.json'
+                sh 'echo $name'
                 sh 'echo "this is a build stage"'
                 input "Does the staging environment look ok?"
             }
