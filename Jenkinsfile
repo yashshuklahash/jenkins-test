@@ -12,10 +12,6 @@ pipeline {
                 checkout scm
             }
         }
-        stage ('pre build') {
-            def props = readJSON file: 'app.json'
-        }
-
         stage('Build Stage') {
             steps {
                 sh 'ls -la'
