@@ -37,7 +37,7 @@ pipeline {
         stage('Build Stage') {
             steps {    
                 echo configuration
-                echo env.configuration.Project_Name
+                echo env.configuration[Project_Name]
                 echo configuration['Author']
                 echo configuration['S3_Bucket_URL']
                 sh 'echo "this is a build stage"'
