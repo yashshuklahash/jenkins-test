@@ -11,13 +11,12 @@ pipeline {
     }
    
     options{
-   parameters([
-    string(name: 'Project Name', defaultValue: project , description: 'Enter your project name : ' )
-   ])
-       
-    
+        skipStagesAfterUnstable() 
     }
     
+    parameters {
+        string(name: 'Project Name', defaultValue: project , description: 'Enter your project name : ' )
+    }
 
     
     stages {
