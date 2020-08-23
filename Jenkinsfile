@@ -29,19 +29,19 @@ pipeline {
             steps{
                 script {
                 def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
-                    parameters: [string(name: 'name', defaultValue: env.project , description: 'Enter your project name : ' ) ,
-                                 string(name: 'author', defaultValue: env.author , description: 'Enter script author name : ' ) ,
-                                 string(name: 's3', defaultValue: env.S3_Bucket , description: 'Enter S3 bucket URL : ' )   ,
-                                 string(name: 'api', defaultValue: env.API , description: 'Enter api endpoint : ' )  ,
-                                 choice(name: 'stage', defaultValue: env.stage , choices: env.stage_choice , description: 'Enter stage to deploy to : ' ),
-                                 booleanParam(name: 'HA', defaultValue: env.highavailable , description: 'deploy in High Availability ? ' )]
+                    parameters: [string(name: 'Project_Name', defaultValue: env.project , description: 'Enter your project name : ' ) ,
+                                 string(name: 'Script_Author', defaultValue: env.author , description: 'Enter script author name : ' ) ,
+                                 string(name: 'S3_Bucket_URL', defaultValue: env.s3 , description: 'Enter S3 bucket URL : ' )   ,
+                                 string(name: 'API_Endpoint', defaultValue: env.API , description: 'Enter api endpoint : ' )  ,
+                                 choice(name: 'Stage', defaultValue: env.stage , choices: env.stage_choice , description: 'Enter stage to deploy to : ' ),
+                                 booleanParam(name: 'High_Available', description: 'deploy in High Availability ? ' )]
                 
-                env.Project_Name = configuration.name
-                env.Author_Name = configuration.author
-                env.S3_Bucket_URL = configuration.s3
-                env.API_Endpoint = configuration.api
-                env.Stage = configuration.stage
-                env.HA = configuration.HA
+                env.Project_Name = configuration.Project_Name
+                env.Author_Name = configuration.Script_Author
+                env.S3_Bucket_URL = configuration.S3_Bucket_URL
+                env.API_Endpoint = configuration.API_Endpoint
+                env.Stage = configuration.Stage
+                env.HA = configuration.High_Available
                 
                  
                 }
@@ -51,12 +51,12 @@ pipeline {
         stage('Build Stage') {
             steps {    
                 
-                echo env.Project_Name
-                echo env.Author_Name 
-                echo env.S3_Bucket_URL 
-                echo env.API_Endpoint 
-                echo env.Stage 
-                echo env.HA 
+                echo "Project Name is : $Project_Name "
+                echo "Author Name is : $Author_Name "
+                echo "S3 Bucket URL is : $S3_Bucket_URL " 
+                echo "API Endpoint is : $API_Endpoint " 
+                echo "Stage for Deployment is : $Stage " 
+                echo "Is Deployment HighAvailale ? : $HA " 
                 
             }
         }
