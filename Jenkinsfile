@@ -27,12 +27,12 @@ def generateStage(cust) {
                 
                 }
             
-                echo "Project Name is : $${cust}_Project_Name "
-                echo "Author Name is : $${cust}_Author_Name "
-                echo "S3 Bucket URL is : $${cust}_S3_Bucket_URL " 
-                echo "API Endpoint is : $${cust}_API_Endpoint " 
-                echo "Stage for Deployment is : $${cust}_Stage " 
-                echo "Is Deployment HighAvailale ? : $${cust}_HA "
+                echo "Project Name is : ${${cust}_Project_Name} "
+                echo "Author Name is : ${${cust}_Author_Name} "
+                echo "S3 Bucket URL is : ${${cust}_S3_Bucket_URL} " 
+                echo "API Endpoint is : ${${cust}_API_Endpoint} " 
+                echo "Stage for Deployment is : ${${cust}_Stage} " 
+                echo "Is Deployment HighAvailale ? : ${${cust}_HA} "
             }               
         }
     }
