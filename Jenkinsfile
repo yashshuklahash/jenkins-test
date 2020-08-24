@@ -1,5 +1,5 @@
 def customers = ["Customer1", "Customer2", "Customer3"]
-
+def parallelStagesMap = [:]
              
 def generateStage(cust) {
     return {
@@ -32,10 +32,15 @@ def generateStage(cust) {
     }
 }
 
-def parallelStagesMap = customers.collectEntries {
-                   cust -> ["${cust}" : generateStage(cust)]
-                 }    
+  
                     
+for (def customer: customers) {
+    // make a copy to ensure that each closure will get it's own variable
+    def copyOfcustomer = customer
+    parallelStagesMap[customer] = {echo "generateStage($copyOfcustomer)"}
+}
+
+echo parallelStagesMap.toString()
 
 
 pipeline {
