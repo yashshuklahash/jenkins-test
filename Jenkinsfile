@@ -4,12 +4,13 @@ def parallelStagesMap = customers.collectEntries {
    cust -> ["${cust}" : generateStage(cust)]
 }
 
-def config = readJSON file: 'app.json'  
+ 
 
 def generateStage(cust) {
     return {
         echo "This is ${cust}"
-       script{                  
+       script{   
+        def config = readJSON file: 'app.json' 
         def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
             parameters: [string(name: 'Project_Name', defaultValue: "${config.${cust}.Prod.Project_Name}" , description: 'Enter your project name : ' ) ,
                          string(name: 'Script_Author', defaultValue: "${config.${cust}.Prod.Author}" , description: 'Enter script author name : ' ) ,
