@@ -1,4 +1,5 @@
 {
+  "customers" : ["Customer1" , "Customer2" , "Customer3"],
   "Project_Name" : "Test Project" ,
   "Author" : "yash" ,
   "S3_Bucket" : "s3://test_bucket/" ,
