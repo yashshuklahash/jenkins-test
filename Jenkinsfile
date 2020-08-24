@@ -61,7 +61,7 @@ pipeline {
                 echo "Stage for Deployment is : $Stage " 
                 echo "Is Deployment HighAvailale ? : $HA " 
               
-              echo parallelStagesMap.toString()
+              
                 
             }
         }
