@@ -111,7 +111,7 @@ pipeline {
         
         stage('Deploy To Production') {
            
-             parallel {parallelStagesMap()}
+             parallel parallelStagesMap
                 
            
         }
