@@ -3,7 +3,7 @@ pipeline {
 
 
     environment {
-        def config = readJSON file: 'sed/parameters.json'
+        
 
     }
 
@@ -35,6 +35,7 @@ pipeline {
         }
         stage('Build') {
             steps {
+            def config = readJSON file: 'sed/parameters.json'
             sh 'bower install'
             sh '''
             API_URI_ESC=$(sed 's/aaa/aaa/g' <<< "${config.API_URI}") 
