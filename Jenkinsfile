@@ -35,6 +35,12 @@ def generateStage(String cust) {
     }
 }
 
+def parallelStagesMap = customers.collectEntries {
+                   cust -> ["${cust}" : generateStage(cust)]
+                 }    
+                    
+
+
 pipeline {
     agent any
     
@@ -65,10 +71,7 @@ pipeline {
         stage('Configure Pipeline Job'){
             steps{
                 script{
-                def parallelStagesMap = customers.collectEntries {
-                   cust -> ["${cust}" : generateStage(cust)]
-                 }    
-                    
+  
                 def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
                     parameters: [string(name: 'Project_Name', defaultValue: env.project , description: 'Enter your project name : ' ) ,
                                  string(name: 'Script_Author', defaultValue: env.author , description: 'Enter script author name : ' ) ,
