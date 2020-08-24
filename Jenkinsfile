@@ -9,7 +9,7 @@ def config = readJSON file: 'app.json'
 def generateStage(cust) {
     return {
         echo "This is ${cust}"
-                  
+       script{                  
         def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
             parameters: [string(name: 'Project_Name', defaultValue: "${config.${cust}.Prod.Project_Name}" , description: 'Enter your project name : ' ) ,
                          string(name: 'Script_Author', defaultValue: "${config.${cust}.Prod.Author}" , description: 'Enter script author name : ' ) ,
@@ -17,7 +17,8 @@ def generateStage(cust) {
                          string(name: 'API_Endpoint', defaultValue: "${config.${cust}.Prod.API}" , description: 'Enter api endpoint : ' )  ,
                          choice(name: 'Stage' , choices: "${config.${cust}.Prod.Stage_choicee}" , description: 'Enter stage to deploy to : ' ),
                          booleanParam(name: 'High_Available', defaultValue: "${config.${cust}.Prod.HA}"  ,  description: 'deploy in High Availability ? ' )]
-       
+       }
+          
     }
        
 }
