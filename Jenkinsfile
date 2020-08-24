@@ -5,7 +5,27 @@ def performDeploymentStages(config,app) {
        return {
         stage("stage: ${app}") {
          echo "this is ${config[app]['Prod']["Project_Name"]}"
-        
+         
+               script{
+                                 
+                    def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
+                        parameters: [string(name: 'Project_Name', defaultValue: "${config[app]['Prod']["Project_Name"]}" , description: 'Enter your project name : ' ) ,
+                                    string(name: 'Script_Author', defaultValue: "${config[app]['Prod']["Author"]}" , description: 'Enter script author name : ' ) ,
+                                    string(name: 'S3_Bucket_URL', defaultValue: "${config[app]['Prod']["S3_Bucket"]}" , description: 'Enter S3 bucket URL : ' )   ,
+                                    string(name: 'API_Endpoint', defaultValue: "${config[app]['Prod']["API"]}" , description: 'Enter api endpoint : ' )  ,
+                                    choice(name: 'Stage' , choices: "${config[app]['Prod']["stage_choices"]}" , description: 'Enter stage to deploy to : ' ),
+                                    booleanParam(name: 'High_Available', defaultValue: "${config[app]['Prod']["HA"]}"  ,  description: 'deploy in High Availability ? ' )]
+               
+               
+               
+               
+                 echo "Project Name is : ${configuration.Project_Name} "
+                echo "Author Name is : ${configuration.Script_Author} "
+                echo "S3 Bucket URL is : ${configuration.S3_Bucket_URL} " 
+                echo "API Endpoint is : ${configuration.API_Endpoint} " 
+                echo "Stage for Deployment is : ${configuration.Stage} " 
+                echo "Is Deployment HighAvailale ? : ${configuration.High_Available} "
+               }
         }
     }
         
