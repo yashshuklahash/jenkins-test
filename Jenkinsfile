@@ -2,10 +2,8 @@ def customers = ["Customer1", "Customer2", "Customer3"]
 def parallelStagesMap = [:]
              
 def generateStage(cust) {
-    return {
-      stage("app"){
-        steps{
-                script{
+  return {
+               
                     def config = readJSON file: 'app.json'            
                     def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
                         parameters: [string(name: 'Project_Name', defaultValue: "${config.${cust}.Prod.Project_Name}" , description: 'Enter your project name : ' ) ,
@@ -22,7 +20,7 @@ def generateStage(cust) {
                     env."${cust}_Stage" = configuration.Stage
                     env."${cust}_HA" = configuration.High_Available
                 
-                }
+                
             
                 echo "Project Name is : ${${cust}_Project_Name} "
                 echo "Author Name is : ${${cust}_Author_Name} "
@@ -31,7 +29,7 @@ def generateStage(cust) {
                 echo "Stage for Deployment is : ${${cust}_Stage} " 
                 echo "Is Deployment HighAvailale ? : ${${cust}_HA} "
 
-        }}}
+        }
 }
 
   
