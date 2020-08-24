@@ -1,40 +1,94 @@
-def performDeploymentStages(String node, String app) {
+def customers = ["Customer1", "Customer2", "Customer3"]
+
+def performDeploymentStages(config,app) {
     stage("build") {
-        echo "Building the app [${app}] on node [${node}]"
+        echo "Building the app [${app}] on node [${config.Project_Name}]"
     }
-    stage("deploy") {
-        echo "Deploying the app ${app}] on node [${node}]"
-    }
-    stage("test") {
-        echo "Testing the app [${app}] on node [${node}]"
-    }
+
 }
 
-pipeline {
-    agent {
-        label 'master'
-    }
-    parameters {
-        string(name: 'NODES', defaultValue: '1,2,3', description: 'Nodes to build, deploy and test')
-        choice(name: 'ENV', choices: 'qa', description: 'Environment')
-        string(name: 'APPS', defaultValue: 'app01,app02', description: 'App names')
-    }
 
+
+pipeline {
+    agent any
+    
+    options {
+    skipStagesAfterUnstable()
+    }
+    
+    environment {
+        def config = readJSON file: 'app.json'
+        project = "${config.Project_Name}"
+        author = "${config.Author}"
+        s3 = "${config.S3_Bucket}"
+        stage = "${config.Stage}"
+        api = "${config.API}"
+        stage_choice = "${config.Stage_choices}"
+        highavailable = "${config.HA}"
+    }
+    
     stages {
-        stage('parallel stage') {
+        
+        stage('Checkout Stage') {
             steps {
-                script {
-                    def nodes = [:]
-                    for (node in params.NODES.tokenize(',')) {
-                        def apps = [:]
-                        for (app in params.APPS.tokenize(',')) {
-                            performDeploymentStages(node, app)
-                        }
-                        parallel apps
-                    }
-                    parallel nodes
-                }
+                sh 'echo "this is a checkout stage"'
+                checkout scm
             }
+        }
+        
+        stage('Configure Pipeline Job'){
+            steps{
+                script{
+                def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
+                    parameters: [string(name: 'Project_Name', defaultValue: env.project , description: 'Enter your project name : ' ) ,
+                                 string(name: 'Script_Author', defaultValue: env.author , description: 'Enter script author name : ' ) ,
+                                 string(name: 'S3_Bucket_URL', defaultValue: env.s3 , description: 'Enter S3 bucket URL : ' )   ,
+                                 string(name: 'API_Endpoint', defaultValue: env.API , description: 'Enter api endpoint : ' )  ,
+                                 choice(name: 'Stage', defaultValue: env.stage , choices: env.stage_choice , description: 'Enter stage to deploy to : ' ),
+                                 booleanParam(name: 'High_Available', description: 'deploy in High Availability ? ' )]
+                
+                env.Project_Name = configuration.Project_Name
+                env.Author_Name = configuration.Script_Author
+                env.S3_Bucket_URL = configuration.S3_Bucket_URL
+                env.API_Endpoint = configuration.API_Endpoint
+                env.Stage = configuration.Stage
+                env.HA = configuration.High_Available
+                
+                 
+                }
+        }
+        }
+        
+        stage('Build Stage') {
+            steps {    
+                
+                echo "Project Name is : $Project_Name "
+                echo "Author Name is : $Author_Name "
+                echo "S3 Bucket URL is : $S3_Bucket_URL " 
+                echo "API Endpoint is : $API_Endpoint " 
+                echo "Stage for Deployment is : $Stage " 
+                echo "Is Deployment HighAvailale ? : $HA " 
+                
+            }
+        }
+        
+        stage('Approval !! ') {
+            steps {
+                input message : "Approval! Deploy the code?" , ok: ' Deploy !'
+            }
+        }
+        
+        stage('Deploy To Production') {
+           steps {
+                script {
+                   def nodes = [:]
+                   for (cust in customers) {
+                        def config = readJSON file: 'app.json'
+                       nodes[cust] = {performDeploymentStages(config,cust)}
+                   }   
+                        parallel nodes
+                }
+           }
         }
     }
 }
