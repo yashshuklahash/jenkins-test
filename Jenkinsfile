@@ -67,9 +67,41 @@ pipeline {
             }
         }
         
-        stage('Production Stage') {
-            steps {
-                sh 'echo "this is a Production Stage"'
+        stage('Deploy To Production') {
+            parallel
+            {
+                stage('Customer 1 : Deploy'){
+                    environment {
+                            def config = readJSON file: 'app.json'
+                            project = "${config.Cust1.Project_Name}"
+                            author = "${config.Cust1.Author}"
+                            s3 = "${config.Cust1.S3_Bucket}"
+                            stage = "${config.Cust1.Stage}"
+                            api = "${config.Cust1.API}"
+                            stage_choice = "${config.Cust1.Stage_choices}"
+                            highavailable = "${config.Cust1.HA}"
+                    }
+                    steps{
+                        echo "Project Name is : $project "
+                        echo "Author Name is : $author "
+                        echo "S3 Bucket URL is : $s3 " 
+                        echo "API Endpoint is : $api " 
+                        echo "Stage for Deployment is : $stage_choice " 
+                        echo "Is Deployment HighAvailale ? : $highavailable " 
+                    }  
+                }
+                stage('Customer 2 : Deploy'){
+                    steps{
+                        echo "Hello"
+                    }  
+                }
+                stage('Customer 3 : Deploy'){
+                    steps{
+                        echo "Hello"
+              
+                    }  
+                }
+            
             }
         }
     }
