@@ -79,7 +79,7 @@ pipeline {
           parallel {
           
             for (def cust: customers)            
-            {
+            
             
                 "${cust}" : {  stage("${cust} : Deploy") {
             steps{ 
@@ -111,7 +111,7 @@ pipeline {
             }               
         }
             
-            }}}
+            }}
             }
           }
     
