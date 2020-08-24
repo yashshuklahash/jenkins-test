@@ -112,14 +112,9 @@ pipeline {
 
 
           steps{
-               parallel (parallelStagesMap)
-          }
-
-             
-            
-                  
-             
-                
+               parallel parallelStagesMap
+            }
+    
            
         }
     }
