@@ -1,10 +1,14 @@
 def customers = ["Customer1", "Customer2", "Customer3"]
 
-def performDeploymentStages(config,app) {
-    stage("build") {
-        echo "Building the app [${app}] on node [${config.Project_Name}]"
-    }
 
+def generateStage(cust ,config) {
+    return {
+    
+        echo "This is ${cust}"
+        echo "This is ${config.Author}"
+    
+    }
+       
 }
 
 
@@ -17,7 +21,7 @@ pipeline {
     }
     
     environment {
-        def config = readJSON file: 'app.json'
+        
         project = "${config.Project_Name}"
         author = "${config.Author}"
         s3 = "${config.S3_Bucket}"
@@ -81,12 +85,12 @@ pipeline {
         stage('Deploy To Production') {
            steps {
                 script {
-                   def nodes = [:]
-                   for (cust in customers) {
-                        def config = readJSON file: 'app.json'
-                        performDeploymentStages(config,cust)
-                   }   
-                        parallel nodes
+                    def config = readJSON file: 'app.json'
+                    def parallel_stages = [:]
+                    for(cust in customers){
+                        parallel_stages["${cust}"] : generateStage( ${cust} , config)
+                    }
+                    parallel parallel_stages
                 }
            }
         }
