@@ -1,0 +1,89 @@
+pipeline {
+    agent scale_fe_2020
+
+
+    environment {
+        def config = readJSON file: 'sed/parameters.json'
+
+    }
+
+    stages {
+
+        stage('Install Node modules') {
+            steps {
+              sh   'echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"'
+              sh '''
+                sudo systemctl stop apt-daily.service || true
+                sudo systemctl kill --kill-who=all apt-daily.service || true
+                sudo pkill -9 apt-daily.service || true
+                sudo pkill -9 apt-get || true
+                sleep 5;
+                # wait until `apt-get updated` has been killed
+                while ! (systemctl list-units --all apt-daily.service | egrep -q '(dead|failed)')
+                do
+                  sleep 1;
+                done
+                sudo rm /var/lib/apt/lists/lock || true
+                sudo rm /var/cache/apt/archives/lock || true
+                sudo rm /var/lib/dpkg/lock || true
+                curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+                sudo apt-get install -y nodejs
+                sudo npm i -g bower
+                npm install
+                '''
+            }
+        }
+        stage('Build') {
+            steps {
+            sh 'bower install'
+            sh '''
+            API_URI_ESC=$(sed 's/aaa/aaa/g' <<< "${config.API_URI}") 
+            TILES_URL_ESC=$(sed 's/aaa/aaa/g' <<< "${config.TILES_URL}") 
+            DIRECTORY_URL_ESC=$(sed 's/aaa/aaa/g' <<< "${config.DIRECTORY_URL}")
+            '''
+            if ("${config.BUILD_INSTANCE}" == 'PROD') {
+                sh """
+                echo "JENKINS START: Building for production"
+                sed -i.bak "s//^\(\s\+'apiUri':\).\+,//\1 '${API_URI_ESC}\//prod\//views',//" Gruntfile.js
+                sed -i.bak "s//^\(\s\+'tileServerUrl':\).\+,//\1 '${TILES_URL_ESC}',//" Gruntfile.js
+                sed -i.bak "s//^\(\s\+'directoryUrl':\).\+,//\1 '${DIRECTORY_URL_ESC}',//" Gruntfile.js
+                sed -i.bak "s//^\(\s\+designLegendPngFilename:\).\+,//\1 '${config.DESIGN_LEGEND_FILENAME}',//" Gruntfile.js
+                sed -i.bak "s//^\(\s\+'maxZoomForClusters':\).\+,//\1 '${config.MAX_ZOOM_FOR_CLUSTERS}',//" Gruntfile.js
+                sed -i.bak "s//^\(\s\+applySelectionLimit:\).\+,//\1 '${config.APPLY_SELECTION_LIMIT}',//" Gruntfile.js
+                sed -i.bak "s//^\(\s\+showLegend:\).\+,//\1 '${config.SHOW_LEGEND}',//" Gruntfile.js
+                sed -i.bak "s//^\(\s\+userPoolId:\).\+,//\1 '${config.USER_POOL_ID}',//" Gruntfile.js
+                sed -i.bak "s//^\(\s\+clientId:\).\+,//\1 '${config.CLIENT_ID}',//" Gruntfile.js
+                sed -i.bak "s//^\(\s\+'tileServerUrls':\).\+,//\1 '${config.TILES_URLS}',//" Gruntfile.js
+                
+                grunt build-prod
+                """
+            } 
+            }
+
+        }
+        stage('Deploy to S3') {
+            input{
+            message "Do you want to proceed for the deployment?"
+           }
+        //    steps {
+        //        sh 'echo "Deploying"'
+        //        if (env.S3_BUCKET_FOR_DEPLOY == 'NO_BUCKET') {
+        //            sh '''
+        //            echo "JENKINS ERROR: Must set a valid S3 bucket to deploy"
+        //            exit
+        //            '''                
+        //        }
+        //        if (env.BUILD_INSTANCE == 'PROD') {
+        //            sh 'aws s3 sync dist "s3://${S3_BUCKET_FOR_DEPLOY}/prod"'
+        //        }else if (env.BUILD_INSTANCE == 'UAT') {
+        //            sh 'aws s3 sync dist "s3://${S3_BUCKET_FOR_DEPLOY}/uat"'
+        //        }else if (env.BUILD_INSTANCE == 'TESTING') {
+        //            sh 'aws s3 sync dist "s3://${S3_BUCKET_FOR_DEPLOY}/testing"'
+        //        }else {
+        //            sh 'echo "Invalid build instance!"'
+        //            sh 'echo "JENKINS INFO: Not deploying"'
+        //        }
+        //    }
+        }
+    }
+}
