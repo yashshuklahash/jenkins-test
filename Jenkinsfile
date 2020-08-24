@@ -5,7 +5,7 @@ def generateStage(cust ,config) {
     return {
     
         echo "This is ${cust}"
-        echo "This is ${config.Author}"
+        echo "This is ${config.Project_Name}"
     
     }
        
