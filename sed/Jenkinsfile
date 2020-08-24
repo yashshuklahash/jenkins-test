@@ -44,16 +44,16 @@ pipeline {
             if ("${config.BUILD_INSTANCE}" == 'PROD') {
                 sh """
                 echo "JENKINS START: Building for production"
-                sed -i.bak "s//^\(\s\+'apiUri':\).\+,//\1 '${API_URI_ESC}\//prod\//views',//" Gruntfile.js
-                sed -i.bak "s//^\(\s\+'tileServerUrl':\).\+,//\1 '${TILES_URL_ESC}',//" Gruntfile.js
-                sed -i.bak "s//^\(\s\+'directoryUrl':\).\+,//\1 '${DIRECTORY_URL_ESC}',//" Gruntfile.js
-                sed -i.bak "s//^\(\s\+designLegendPngFilename:\).\+,//\1 '${config.DESIGN_LEGEND_FILENAME}',//" Gruntfile.js
-                sed -i.bak "s//^\(\s\+'maxZoomForClusters':\).\+,//\1 '${config.MAX_ZOOM_FOR_CLUSTERS}',//" Gruntfile.js
-                sed -i.bak "s//^\(\s\+applySelectionLimit:\).\+,//\1 '${config.APPLY_SELECTION_LIMIT}',//" Gruntfile.js
-                sed -i.bak "s//^\(\s\+showLegend:\).\+,//\1 '${config.SHOW_LEGEND}',//" Gruntfile.js
-                sed -i.bak "s//^\(\s\+userPoolId:\).\+,//\1 '${config.USER_POOL_ID}',//" Gruntfile.js
-                sed -i.bak "s//^\(\s\+clientId:\).\+,//\1 '${config.CLIENT_ID}',//" Gruntfile.js
-                sed -i.bak "s//^\(\s\+'tileServerUrls':\).\+,//\1 '${config.TILES_URLS}',//" Gruntfile.js
+                sed -i.bak "s/^\\(\\s\\+'apiUri':\\).\\+,/\\1 '${API_URI_ESC}\\/prod\\/views',/" Gruntfile.js
+                sed -i.bak "s/^\\(\\s\\+'tileServerUrl':\\).\\+,/\\1 '${TILES_URL_ESC}',/" Gruntfile.js
+                sed -i.bak "s/^\\(\\s\\+'directoryUrl':\\).\\+,/\\1 '${DIRECTORY_URL_ESC}',/" Gruntfile.js
+                sed -i.bak "s/^\\(\\s\\+designLegendPngFilename:\\).\\+,/\\1 '${config.DESIGN_LEGEND_FILENAME}',/" Gruntfile.js
+                sed -i.bak "s/^\\(\\s\\+'maxZoomForClusters':\\).\\+,/\\1 '${config.MAX_ZOOM_FOR_CLUSTERS}',/" Gruntfile.js
+                sed -i.bak "s/^\\(\\s\\+applySelectionLimit:\\).\\+,/\\1 '${config.APPLY_SELECTION_LIMIT}',/" Gruntfile.js
+                sed -i.bak "s/^\\(\\s\\+showLegend:\\).\\+,/\\1 '${config.SHOW_LEGEND}',/" Gruntfile.js
+                sed -i.bak "s/^\\(\\s\\+userPoolId:\\).\\+,/\\1 '${config.USER_POOL_ID}',/" Gruntfile.js
+                sed -i.bak "s/^\\(\\s\\+clientId:\\).\\+,/\\1 '${config.CLIENT_ID}',/" Gruntfile.js
+                sed -i.bak "s/^\\(\\s\\+'tileServerUrls':\\).\\+,/\\1 '${config.TILES_URLS}',/" Gruntfile.js
                 
                 grunt build-prod
                 """
