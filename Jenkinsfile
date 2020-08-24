@@ -1,16 +1,10 @@
 def customers = ["Customer1", "Customer2", "Customer3"]
 
-def parallelStagesMap = customers.collectEntries {
-   cust -> ["${cust}" : generateStage(cust)]
-}
-
-def generateStage(cust) {
-    return {
-    
-       echo "This is ${${cust}_Project}"
-    
+def performDeploymentStages(config,app) {
+    stage("build") {
+        echo "Building the app [${app}] on node [${config}.Project_Name]"
     }
-       
+
 }
 
 
@@ -24,10 +18,6 @@ pipeline {
     
     environment {
         def config = readJSON file: 'app.json'
-       costumers.each {
-          cust -> "${cust}_Project" = "${config.${cust}.Prod.Project_Name}"
-       }
-       
         project = "${config.Project_Name}"
         author = "${config.Author}"
         s3 = "${config.S3_Bucket}"
@@ -91,7 +81,12 @@ pipeline {
         stage('Deploy To Production') {
            steps {
                 script {
-                    parallel parallelStagesMap
+                   def nodes = [:]
+                   for (cust in customers) {
+                        def config = readJSON file: 'app.json'
+                        performDeploymentStages(config,cust)
+                   }   
+                        parallel nodes
                 }
            }
         }
