@@ -13,7 +13,7 @@ def performDeploymentStages(config,app) {
                                     string(name: 'Script_Author', defaultValue: "${config[app]['Prod']["Author"]}" , description: 'Enter script author name : ' ) ,
                                     string(name: 'S3_Bucket_URL', defaultValue: "${config[app]['Prod']["S3_Bucket"]}" , description: 'Enter S3 bucket URL : ' )   ,
                                     string(name: 'API_Endpoint', defaultValue: "${config[app]['Prod']["API"]}" , description: 'Enter api endpoint : ' )  ,
-                                    choice(name: 'Stage' , choices: "${config[app]['Prod']["stage_choices"]}" , description: 'Enter stage to deploy to : ' ),
+                                    choice(name: 'Stage' , choices: "${config[app]['Prod']["Stage_choices"]}" , description: 'Enter stage to deploy to : ' ),
                                     booleanParam(name: 'High_Available', defaultValue: "${config[app]['Prod']["HA"]}"  ,  description: 'deploy in High Availability ? ' )]
                
                
