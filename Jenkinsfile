@@ -114,7 +114,7 @@ pipeline {
 
 
              
-            parallel {parallelStagesMap}
+            parallel parallelStagesMap
                   
              
                 
