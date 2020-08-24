@@ -3,7 +3,7 @@ def customers = ["Customer1", "Customer2", "Customer3"]
 def performDeploymentStages(config,app) {
     stage("build") {
         
-        echo "this is ${config[app].Prod.Project_Name}"
+        echo "this is ${config.Project_Name}"
         
         
         
@@ -91,7 +91,7 @@ pipeline {
                    for (cust in customers) {
                         def config = readJSON file: 'app.json'
                        echo "${config[cust][Prod]}"
-                       nodes[cust] = {performDeploymentStages(config ,cust)}
+                       nodes[cust] = {performDeploymentStages( ${config[cust][Prod]} ,cust)}
                    }   
                         parallel nodes
                 }
