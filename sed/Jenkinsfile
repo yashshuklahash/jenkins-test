@@ -1,12 +1,6 @@
 pipeline {
     agent any
 
-
-    environment {
-        
-
-    }
-
     stages {
 
         stage('Install Node modules') {
@@ -35,14 +29,15 @@ pipeline {
         }
         stage('Build') {
             steps {
-            def config = readJSON file: 'sed/parameters.json'
+              script{
+                    def config = readJSON file: 'sed/parameters.json'
             sh 'bower install'
             sh '''
             API_URI_ESC=$(sed 's/aaa/aaa/g' <<< "${config.API_URI}") 
             TILES_URL_ESC=$(sed 's/aaa/aaa/g' <<< "${config.TILES_URL}") 
             DIRECTORY_URL_ESC=$(sed 's/aaa/aaa/g' <<< "${config.DIRECTORY_URL}")
             '''
-                script{
+                
             if ("${config.BUILD_INSTANCE}" == 'PROD') {
                 sh """
                 echo "JENKINS START: Building for production"
