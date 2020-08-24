@@ -90,7 +90,7 @@ pipeline {
                 script {
                    def config = readJSON file: 'app.json'
                    def parallelStagesMap = customers.collectEntries {
-                     it -> ["${it}" : performDeploymentStages(config ,it)]
+                     ["${it}" : performDeploymentStages(config ,it)]
                     }
                  
                   parallel parallelStagesMap
