@@ -1,15 +1,13 @@
 pipeline {
 
-   def generateStage = {
-      
-   String cust -> return {
+   def generateStage = { String cust -> 
         echo "This is ${cust}"
        
-       script{  
+        script{  
            def config = readJSON file: 'app.json'
            def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
                         parameters: [string(name: 'Project_Name', defaultValue: "test" , description: 'Enter your project name : ' ) ]
-       }
+       
       }
       }
    
