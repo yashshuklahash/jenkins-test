@@ -37,7 +37,7 @@ def generateStage(cust) {
 for (def customer: customers) {
     // make a copy to ensure that each closure will get it's own variable
     def copyOfcustomer = customer
-    parallelStagesMap[customer] = {echo "generateStage($copyOfcustomer)"}
+    parallelStagesMap[customer] = {generateStage($copyOfcustomer)}
 }
 
 echo parallelStagesMap.toString()
