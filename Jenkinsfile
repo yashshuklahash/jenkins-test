@@ -88,7 +88,7 @@ pipeline {
                     def config = readJSON file: 'app.json'
                     def parallel_stages = [:]
                     for(cust in customers){
-                        parallel_stages["${cust}"] = generateStage( ${cust} , config)
+                        parallel_stages[cust] = generateStage( cust , config)
                     }
                     parallel parallel_stages
                 }
