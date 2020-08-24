@@ -3,8 +3,6 @@ def customers = ["Customer1", "Customer2", "Customer3"]
              
 def generateStage(String cust) {
     return {
-        stage("${cust} : Deploy") {
-            steps{ 
                 script{
                     def config = readJSON file: 'app.json'            
                     def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
@@ -30,8 +28,7 @@ def generateStage(String cust) {
                 echo "API Endpoint is : ${${cust}_API_Endpoint} " 
                 echo "Stage for Deployment is : ${${cust}_Stage} " 
                 echo "Is Deployment HighAvailale ? : ${${cust}_HA} "
-            }               
-        }
+
     }
 }
 
