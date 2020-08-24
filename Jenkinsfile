@@ -110,11 +110,10 @@ pipeline {
         }
         
         stage('Deploy To Production') {
-             steps{
-                  script{
+             
                   parallel parallelStagesMap
-                  }
-             }
+                  
+             
                 
            
         }
