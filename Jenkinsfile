@@ -2,7 +2,13 @@ def customers = ["Customer1", "Customer2", "Customer3"]
 
 def performDeploymentStages(config,app) {
     stage("build") {
-        echo "Building the app [${app}] on node [${config.Project_Name}]"
+        
+        echo "this is ${config.app.Prod.Project_Name}"
+        
+        
+        
+        
+        
     }
 
 }
