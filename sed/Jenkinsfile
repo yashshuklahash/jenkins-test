@@ -11,7 +11,7 @@ pipeline {
 
         stage('Install Node modules') {
             steps {
-              sh   'echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"'
+              
               sh '''
                 sudo systemctl stop apt-daily.service || true
                 sudo systemctl kill --kill-who=all apt-daily.service || true
