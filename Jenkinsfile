@@ -81,7 +81,7 @@ pipeline {
                             stage_choice = "${config.Cust1.Prod.Stage_choices}"
                             highavailable = "${config.Cust1.Prod.HA}"
                     }
-                    
+                steps{    
                 script{
                 def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
                     parameters: [string(name: 'Project_Name', defaultValue: env.project , description: 'Enter your project name : ' ) ,
@@ -101,7 +101,7 @@ pipeline {
                  
                 }
                     
-                    steps{
+                   
                         echo "Project Name is : $Project_Name "
                         echo "Author Name is : $Author_Name "
                         echo "S3 Bucket URL is : $S3_Bucket_URL " 
