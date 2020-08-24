@@ -1,7 +1,7 @@
 def customers = ["Customer1", "Customer2", "Customer3"]
 
 def parallelStagesMap = customers.collectEntries {
-    ["${iterate}" : generateStage(iterate)]
+    ["${x}" : generateStage(x)]
 }
 
 def generateStage(cust) {
