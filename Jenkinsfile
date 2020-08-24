@@ -63,7 +63,7 @@ pipeline {
         
         stage('Approval !! ') {
             steps {
-                input message : "Deploy the code?" , ok: ' Deploy !'
+                input message : "Approval! Deploy the code?" , ok: ' Deploy !'
             }
         }
         
@@ -73,21 +73,41 @@ pipeline {
                 stage('Customer 1 : Deploy'){
                     environment {
                             def config = readJSON file: 'app.json'
-                            project = "${config.Cust1.Project_Name}"
-                            author = "${config.Cust1.Author}"
-                            s3 = "${config.Cust1.S3_Bucket}"
-                            stage = "${config.Cust1.Stage}"
-                            api = "${config.Cust1.API}"
-                            stage_choice = "${config.Cust1.Stage_choices}"
-                            highavailable = "${config.Cust1.HA}"
+                            project = "${config.Cust1.Prod.Project_Name}"
+                            author = "${config.Cust1.Prod.Author}"
+                            s3 = "${config.Cust1.Prod.S3_Bucket}"
+                            stage = "${config.Cust1.Prod.Stage}"
+                            api = "${config.Cust1.Prod.API}"
+                            stage_choice = "${config.Cust1.Prod.Stage_choices}"
+                            highavailable = "${config.Cust1.Prod.HA}"
                     }
+                    
+                script {
+                def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
+                    parameters: [string(name: 'Project_Name', defaultValue: env.project , description: 'Enter your project name : ' ) ,
+                                 string(name: 'Script_Author', defaultValue: env.author , description: 'Enter script author name : ' ) ,
+                                 string(name: 'S3_Bucket_URL', defaultValue: env.s3 , description: 'Enter S3 bucket URL : ' )   ,
+                                 string(name: 'API_Endpoint', defaultValue: env.API , description: 'Enter api endpoint : ' )  ,
+                                 choice(name: 'Stage', defaultValue: env.stage , choices: env.stage_choice , description: 'Enter stage to deploy to : ' ),
+                                 booleanParam(name: 'High_Available', description: 'deploy in High Availability ? ' )]
+                
+                env.Project_Name = configuration.Project_Name
+                env.Author_Name = configuration.Script_Author
+                env.S3_Bucket_URL = configuration.S3_Bucket_URL
+                env.API_Endpoint = configuration.API_Endpoint
+                env.Stage = configuration.Stage
+                env.HA = configuration.High_Available
+                
+                 
+                }
+                    
                     steps{
-                        echo "Project Name is : $project "
-                        echo "Author Name is : $author "
-                        echo "S3 Bucket URL is : $s3 " 
-                        echo "API Endpoint is : $api " 
-                        echo "Stage for Deployment is : $stage_choice " 
-                        echo "Is Deployment HighAvailale ? : $highavailable " 
+                        echo "Project Name is : $Project_Name "
+                        echo "Author Name is : $Author_Name "
+                        echo "S3 Bucket URL is : $S3_Bucket_URL " 
+                        echo "API Endpoint is : $API_Endpoint " 
+                        echo "Stage for Deployment is : $Stage " 
+                        echo "Is Deployment HighAvailale ? : $HA " 
                     }  
                 }
                 stage('Customer 2 : Deploy'){
