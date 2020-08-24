@@ -1,5 +1,5 @@
 // List of customers
-def customers = ["Customer1", "Customer2", "Customer3"]
+//def customers = ["Customer1", "Customer2", "Customer3"]
 
 // For Every customer a separate parallel stage is configured
 def performDeploymentStages(config,app) {
@@ -100,6 +100,7 @@ pipeline {
            steps {
                 script {
                    def config = readJSON file: 'app.json'
+                   def customers = config["customers"]
                    def parallelStagesMap = customers.collectEntries {
                      ["${it} : Deploy" : performDeploymentStages(config ,it)]
                     }
