@@ -1,8 +1,37 @@
-def customers = ["Customer1", "Customer2", "Customer3"]
 
-def parallelStagesMap = customers.collectEntries {
-    ["${x}" : generateStage(x)]
-}
+
+
+pipeline {
+    agent any
+    
+    options {
+    skipStagesAfterUnstable()
+    }
+    
+    environment {
+        def config = readJSON file: 'app.json'
+        project = "${config.Project_Name}"
+        author = "${config.Author}"
+        s3 = "${config.S3_Bucket}"
+        stage = "${config.Stage}"
+        api = "${config.API}"
+        stage_choice = "${config.Stage_choices}"
+        highavailable = "${config.HA}"
+    }
+    
+    stages {
+        
+        stage('Checkout Stage') {
+            steps {
+                sh 'echo "this is a checkout stage"'
+                checkout scm
+                script{
+                
+                def customers = ["Customer1", "Customer2", "Customer3"]
+
+                def parallelStagesMap = customers.collectEntries {
+                                    ["${x}" : generateStage(x)]
+                }
 
 def generateStage(cust) {
     return {
@@ -38,32 +67,10 @@ def generateStage(cust) {
     }
 }
 
-
-
-pipeline {
-    agent any
-    
-    options {
-    skipStagesAfterUnstable()
-    }
-    
-    environment {
-        def config = readJSON file: 'app.json'
-        project = "${config.Project_Name}"
-        author = "${config.Author}"
-        s3 = "${config.S3_Bucket}"
-        stage = "${config.Stage}"
-        api = "${config.API}"
-        stage_choice = "${config.Stage_choices}"
-        highavailable = "${config.HA}"
-    }
-    
-    stages {
-        
-        stage('Checkout Stage') {
-            steps {
-                sh 'echo "this is a checkout stage"'
-                checkout scm
+                
+                
+                }    
+                
             }
         }
         
