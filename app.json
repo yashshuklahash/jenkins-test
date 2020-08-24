@@ -5,7 +5,7 @@
   "API" : "test API" ,
   "Stage" : "Prod" ,
   "HA" : "true" ,
-  "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+  "Stage_choices" : "Dev\nTest\nPreprod\nProd" ,
   "Cust1" : {
     "Project_Name" : "Test Project" ,
     "Author" : "yash" ,
