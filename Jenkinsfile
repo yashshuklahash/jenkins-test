@@ -1,3 +1,6 @@
+def customers = ["Customer1", "Customer2", "Customer3"]
+
+             
 def generateStage(String cust) {
     return {
         stage("${cust} : Deploy") {
@@ -62,6 +65,10 @@ pipeline {
         stage('Configure Pipeline Job'){
             steps{
                 script{
+                def parallelStagesMap = customers.collectEntries {
+                   cust -> ["${cust}" : generateStage(cust)]
+                 }    
+                    
                 def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
                     parameters: [string(name: 'Project_Name', defaultValue: env.project , description: 'Enter your project name : ' ) ,
                                  string(name: 'Script_Author', defaultValue: env.author , description: 'Enter script author name : ' ) ,
@@ -102,16 +109,12 @@ pipeline {
         }
         
         stage('Deploy To Production') {
-             def customers = ["Customer1", "Customer2", "Customer3"]
 
-             def parallelStagesMap = customers.collectEntries {
-                   cust -> ["${cust}" : generateStage(cust)]
-             }
 
 
 
              
-               parallel parallelStagesMap
+            parallel {parallelStagesMap}
                   
              
                 
