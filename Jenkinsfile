@@ -90,8 +90,8 @@ pipeline {
                    def nodes = [:]
                    for (cust in customers) {
                         def config = readJSON file: 'app.json'
-                       echo "${config[cust][Prod]}"
-                       nodes[cust] = {performDeploymentStages( config[cust][Prod] ,cust)}
+                       echo "${config[cust]}"
+                       nodes[cust] = {performDeploymentStages( config ,cust)}
                    }   
                         parallel nodes
                 }
