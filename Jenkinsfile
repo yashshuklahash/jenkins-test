@@ -4,14 +4,14 @@ def parallelStagesMap = customers.collectEntries {
    cust -> ["${cust}" : generateStage(cust)]
 }
 
- 
+
 
 def generateStage(cust) {
     return {
         echo "This is ${cust}"
        
        script{   
-        def config = readJSON file: 'app.json' 
+         
         echo "The valye  --- ${config.${cust}.Prod.Project_Name}" 
        }
        
@@ -95,6 +95,7 @@ pipeline {
         stage('Deploy To Production') {
            steps {
                 script {
+                    def config = readJSON file: 'app.json'
                     parallel parallelStagesMap
                 }
            }
