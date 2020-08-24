@@ -1,15 +1,4 @@
-
-
-
-
 pipeline {
-   def customers = ["Customer1", "Customer2", "Customer3"]
-
-   def parallelStagesMap = customers.collectEntries {
-   cust -> ["${cust}" : generateStage(cust)]
-   }
-
-
 
    def generateStage = {
       
@@ -21,12 +10,8 @@ pipeline {
            def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
                         parameters: [string(name: 'Project_Name', defaultValue: "test" , description: 'Enter your project name : ' ) ]
        }
-       
-       
-          
-    }
-       
-}
+      }
+      }
    
    
     agent any
@@ -100,7 +85,11 @@ pipeline {
         stage('Deploy To Production') {
            steps {
                 script {
-                    
+                     def customers = ["Customer1", "Customer2", "Customer3"]
+
+                     def parallelStagesMap = customers.collectEntries {
+                                    cust -> ["${cust}" : generateStage(cust)]
+                     }  
                     
                     parallel parallelStagesMap
                 }
