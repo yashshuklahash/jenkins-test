@@ -1,5 +1,5 @@
 pipeline {
-    agent scale_fe_2020
+    agent any
 
 
     environment {
