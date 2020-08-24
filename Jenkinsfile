@@ -11,8 +11,9 @@ pipeline {
 
 
 
-   def generateStage(cust) {
-    return {
+   def generateStage = {
+      
+   String cust -> return {
         echo "This is ${cust}"
        
        script{  
