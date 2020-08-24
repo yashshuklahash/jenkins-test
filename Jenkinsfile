@@ -1,6 +1,7 @@
 def customers = ["Customer1", "Customer2", "Customer3"]
 
 def performDeploymentStages(config,app) {
+    return {
     stage("build") {
         
         echo "this is ${config[app]['Prod']["Project_Name"]}"
@@ -10,7 +11,7 @@ def performDeploymentStages(config,app) {
         
         
     }
-
+    }
 }
 
 
