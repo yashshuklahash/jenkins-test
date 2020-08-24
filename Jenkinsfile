@@ -4,8 +4,8 @@ def performDeploymentStages(config,app) {
 
        return {
         stage("stage: ${app}") {
-         echo "this is ${config[stage]['Prod']["Project_Name"]}"
-        echo "this is ${stage}"
+         echo "this is ${config[app]['Prod']["Project_Name"]}"
+        
         }
     }
         
