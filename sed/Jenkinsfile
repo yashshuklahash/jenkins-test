@@ -62,29 +62,6 @@ pipeline {
             }
 
         }
-        stage('Deploy to S3') {
-            input{
-            message "Do you want to proceed for the deployment?"
-           }
-        //    steps {
-        //        sh 'echo "Deploying"'
-        //        if (env.S3_BUCKET_FOR_DEPLOY == 'NO_BUCKET') {
-        //            sh '''
-        //            echo "JENKINS ERROR: Must set a valid S3 bucket to deploy"
-        //            exit
-        //            '''                
-        //        }
-        //        if (env.BUILD_INSTANCE == 'PROD') {
-        //            sh 'aws s3 sync dist "s3://${S3_BUCKET_FOR_DEPLOY}/prod"'
-        //        }else if (env.BUILD_INSTANCE == 'UAT') {
-        //            sh 'aws s3 sync dist "s3://${S3_BUCKET_FOR_DEPLOY}/uat"'
-        //        }else if (env.BUILD_INSTANCE == 'TESTING') {
-        //            sh 'aws s3 sync dist "s3://${S3_BUCKET_FOR_DEPLOY}/testing"'
-        //        }else {
-        //            sh 'echo "Invalid build instance!"'
-        //            sh 'echo "JENKINS INFO: Not deploying"'
-        //        }
-        //    }
-        }
+       
     }
 }
