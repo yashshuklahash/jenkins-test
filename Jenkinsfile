@@ -1,7 +1,7 @@
 def customers = ["Customer1", "Customer2", "Customer3"]
 
              
-def generateStage(String cust) {
+def generateStage(cust) {
     return {
                 script{
                     def config = readJSON file: 'app.json'            
@@ -113,7 +113,7 @@ pipeline {
 
           steps{
             script{
-               parallel(parallelStagesMap)
+               parallel parallelStagesMap
             }
             }
     
