@@ -41,6 +41,7 @@ pipeline {
             TILES_URL_ESC=$(sed 's/aaa/aaa/g' <<< "${config.TILES_URL}") 
             DIRECTORY_URL_ESC=$(sed 's/aaa/aaa/g' <<< "${config.DIRECTORY_URL}")
             '''
+                script{
             if ("${config.BUILD_INSTANCE}" == 'PROD') {
                 sh """
                 echo "JENKINS START: Building for production"
@@ -57,7 +58,7 @@ pipeline {
                 
                 grunt build-prod
                 """
-            } 
+            } }
             }
 
         }
