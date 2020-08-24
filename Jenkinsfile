@@ -81,7 +81,7 @@ pipeline {
             for (def cust: customers)            
             {
             
-             stage("${cust} : Deploy") {
+                "${cust}" : {  stage("${cust} : Deploy") {
             steps{ 
                 script{
                     def config = readJSON file: 'app.json'            
@@ -112,7 +112,7 @@ pipeline {
         }
             
             }}}
-          
+            }
           }
     
            
