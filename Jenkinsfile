@@ -27,7 +27,7 @@ pipeline {
         
         stage('Configure Pipeline Job'){
             steps{
-                script {
+                script{
                 def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
                     parameters: [string(name: 'Project_Name', defaultValue: env.project , description: 'Enter your project name : ' ) ,
                                  string(name: 'Script_Author', defaultValue: env.author , description: 'Enter script author name : ' ) ,
@@ -82,7 +82,7 @@ pipeline {
                             highavailable = "${config.Cust1.Prod.HA}"
                     }
                     
-                script {
+                script{
                 def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
                     parameters: [string(name: 'Project_Name', defaultValue: env.project , description: 'Enter your project name : ' ) ,
                                  string(name: 'Script_Author', defaultValue: env.author , description: 'Enter script author name : ' ) ,
