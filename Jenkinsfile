@@ -1,17 +1,21 @@
-pipeline {
+def customers = ["Customer1", "Customer2", "Customer3"]
 
-   def generateStage = { String cust -> 
-        echo "This is ${cust}"
+def parallelStagesMap = customers.collectEntries {
+   cust -> ["${cust}" : generateStage(cust)]
+}
+
+def generateStage(cust) {
+    return {
+    
+       echo "This is ${${cust}_Project}"
+    
+    }
        
-        script{  
-           def config = readJSON file: 'app.json'
-           def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
-                        parameters: [string(name: 'Project_Name', defaultValue: "test" , description: 'Enter your project name : ' ) ]
-       
-      }
-      }
-   
-   
+}
+
+
+
+pipeline {
     agent any
     
     options {
@@ -20,6 +24,10 @@ pipeline {
     
     environment {
         def config = readJSON file: 'app.json'
+       costumers.each {
+          cust -> "${cust}_Project" = "${config.${cust}.Prod.Project_Name}"
+       }
+       
         project = "${config.Project_Name}"
         author = "${config.Author}"
         s3 = "${config.S3_Bucket}"
@@ -83,12 +91,6 @@ pipeline {
         stage('Deploy To Production') {
            steps {
                 script {
-                     def customers = ["Customer1", "Customer2", "Customer3"]
-
-                     def parallelStagesMap = customers.collectEntries {
-                                    cust -> ["${cust}" : generateStage(cust)]
-                     }  
-                    
                     parallel parallelStagesMap
                 }
            }
