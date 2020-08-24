@@ -6,10 +6,10 @@ def parallelStagesMap = customers.collectEntries {
 
 def generateStage(cust) {
     return {
-    
+       stage("deploy"){
         echo "This is ${cust}"
         input "deploy to prod ?"
-    
+       }
     }
        
 }
