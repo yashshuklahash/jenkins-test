@@ -3,7 +3,7 @@ def customers = ["Customer1", "Customer2", "Customer3"]
 def performDeploymentStages(config,app) {
     stage("build") {
         
-        echo "this is ${config.Project_Name}"
+        echo "this is ${config[${app}]}"
         
         
         
