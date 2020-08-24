@@ -1,13 +1,13 @@
 def customers = ["Customer1", "Customer2", "Customer3"]
 def nodes = [:]
 def performDeploymentStages(config,app) {
-   nodes[cust] = {
-    
-       def stage = app
-       echo "this is ${config[stage]['Prod']["Project_Name"]}"
-       echo "this is ${stage}"
-        
-   }  
+
+       return {
+        stage("stage: ${app}") {
+         echo "this is ${config[stage]['Prod']["Project_Name"]}"
+        echo "this is ${stage}"
+        }
+    }
         
         
   
@@ -88,13 +88,12 @@ pipeline {
         stage('Deploy To Production') {
            steps {
                 script {
-                   
-                   for (cust in customers) {
-                        def config = readJSON file: 'app.json'
-                       //echo "${config[cust]}"
-                        performDeploymentStages( config ,cust)
-                   }   
-                        parallel nodes
+                   def config = readJSON file: 'app.json'
+                   def parallelStagesMap = customers.collectEntries {
+                     it -> ["${it}" : performDeploymentStages(config ,it)]
+                    }
+                 
+                  parallel parallelStagesMap
                 }
            }
         }
