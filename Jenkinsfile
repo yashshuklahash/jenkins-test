@@ -8,6 +8,7 @@ def generateStage(cust) {
     return {
     
         echo "This is ${cust}"
+        input "deploy to prod ?"
     
     }
        
