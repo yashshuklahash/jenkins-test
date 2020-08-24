@@ -36,10 +36,10 @@ def generateStage(cust) {
                     
 for (def customer: customers) {
 
-  parallelStagesMap[customer] = {generateStage(customer)}
+  parallelStagesMap[customer] = generateStage(customer)
 }
 
-echo parallelStagesMap.toString()
+
 
 
 pipeline {
@@ -102,6 +102,8 @@ pipeline {
                 echo "API Endpoint is : $API_Endpoint " 
                 echo "Stage for Deployment is : $Stage " 
                 echo "Is Deployment HighAvailale ? : $HA " 
+              
+              echo parallelStagesMap.toString()
                 
             }
         }
