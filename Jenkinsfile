@@ -1,5 +1,20 @@
 def customers = ["Customer1", "Customer2", "Customer3"]
 
+def parallelStagesMap = customers.collectEntries {
+    ["${cust}" : generateStage(cust)]
+}
+
+def generateStage(cust) {
+    return {
+    
+        echo "This is ${cust}"
+    
+    }
+       
+}
+
+
+
 pipeline {
     agent any
     
@@ -30,7 +45,6 @@ pipeline {
         stage('Configure Pipeline Job'){
             steps{
                 script{
-  
                 def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
                     parameters: [string(name: 'Project_Name', defaultValue: env.project , description: 'Enter your project name : ' ) ,
                                  string(name: 'Script_Author', defaultValue: env.author , description: 'Enter script author name : ' ) ,
@@ -60,8 +74,6 @@ pipeline {
                 echo "API Endpoint is : $API_Endpoint " 
                 echo "Stage for Deployment is : $Stage " 
                 echo "Is Deployment HighAvailale ? : $HA " 
-              
-              
                 
             }
         }
@@ -73,49 +85,11 @@ pipeline {
         }
         
         stage('Deploy To Production') {
-          steps{
-            script{
-          
-          parallel {
-          
-            for (def cust: customers)            
-            
-            
-                "${cust}" : {  stage("${cust} : Deploy") {
-            steps{ 
-                script{
-                    def config = readJSON file: 'app.json'            
-                    def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
-                        parameters: [string(name: 'Project_Name', defaultValue: "${config.${cust}.Prod.Project_Name}" , description: 'Enter your project name : ' ) ,
-                                    string(name: 'Script_Author', defaultValue: "${config.${cust}.Prod.Author}" , description: 'Enter script author name : ' ) ,
-                                    string(name: 'S3_Bucket_URL', defaultValue: "${config.${cust}.Prod.S3_Bucket}" , description: 'Enter S3 bucket URL : ' )   ,
-                                    string(name: 'API_Endpoint', defaultValue: "${config.${cust}.Prod.API}" , description: 'Enter api endpoint : ' )  ,
-                                     choice(name: 'Stage' , choices: "${config.${cust}.Prod.Stage_choicee}" , description: 'Enter stage to deploy to : ' ),
-                                    booleanParam(name: 'High_Available', defaultValue: "${config.${cust}.Prod.HA}"  ,  description: 'deploy in High Availability ? ' )]
-                
-                    env."${cust}_Project_Name" = configuration.Project_Name
-                    env."${cust}_Author_Name" = configuration.Script_Author
-                    env."${cust}_S3_Bucket_URL" = configuration.S3_Bucket_URL
-                    env."${cust}_API_Endpoint" = configuration.API_Endpoint
-                    env."${cust}_Stage" = configuration.Stage
-                    env."${cust}_HA" = configuration.High_Available
-                
+           steps {
+                script {
+                    parallel parallelStagesMap
                 }
-            
-                echo "Project Name is : ${${cust}_Project_Name} "
-                echo "Author Name is : ${${cust}_Author_Name} "
-                echo "S3 Bucket URL is : ${${cust}_S3_Bucket_URL} " 
-                echo "API Endpoint is : ${${cust}_API_Endpoint} " 
-                echo "Stage for Deployment is : ${${cust}_Stage} " 
-                echo "Is Deployment HighAvailale ? : ${${cust}_HA} "
-            }               
-        }
-            
-            }}
-            }
-          }
-    
-           
+           }
         }
     }
 }
