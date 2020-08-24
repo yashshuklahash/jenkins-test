@@ -11,8 +11,8 @@ def generateStage(cust) {
         echo "This is ${cust}"
        
        script{   
-         
-        echo "The valye  --- ${config.${cust}.Prod.Project_Name}" 
+           def configuration = input message: 'Please enter the pipeline configuration !', ok: 'Validate!', 
+                        parameters: [string(name: 'Project_Name', defaultValue: "test" , description: 'Enter your project name : ' ) ]
        }
        
        
