@@ -6,7 +6,7 @@
   "Stage" : "Prod" ,
   "HA" : "true" ,
   "Stage_choices" : "Dev\nTest\nPreprod\nProd" ,
-  "Cust1" : {
+  "Customer1" : {
     "Dev" : {
       "Project_Name" : "Test Project" ,
       "Author" : "yash" ,
@@ -36,7 +36,7 @@
     }
    } ,
   
-  "Cust2" : {
+  "Customer2" : {
     "Dev" : {
       "Project_Name" : "Test Project" ,
       "Author" : "yash" ,
@@ -66,7 +66,7 @@
     }
    } ,
 
-  "Cust3" : {
+  "Customer3" : {
     "Dev" : {
       "Project_Name" : "Customer-3-dev" ,
       "Author" : "yash" ,
