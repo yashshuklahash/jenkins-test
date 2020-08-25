@@ -1,8 +1,7 @@
 // For Every customer a separate parallel stage is configured
 def performDeploymentStages(config,customer,stage) {
     return {
-        stage("Deploy : ${customer}") {
-            steps{
+       
                 echo "this is ${stage} stage"
                 echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
                 echo "Author Name is : ${config[customer][stage]["Author"]} "
@@ -10,8 +9,8 @@ def performDeploymentStages(config,customer,stage) {
                 echo "API Endpoint is : ${config[customer][stage]["API"]} " 
                 echo "Stage for Deployment is : ${config[customer][stage]["Stage_choices"]} " 
                 echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"  
-            }          
-        }
+                     
+        
     }
 }
 
