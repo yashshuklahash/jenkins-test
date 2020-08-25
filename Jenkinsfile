@@ -1,16 +1,12 @@
 // For Every customer a separate parallel stage is configured
 def performDeploymentStages(config,customer,stage) {
-    return {
-       
-                echo "this is ${stage} stage"
-                echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
-                echo "Author Name is : ${config[customer][stage]["Author"]} "
-                echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
-                echo "API Endpoint is : ${config[customer][stage]["API"]} " 
-                echo "Stage for Deployment is : ${config[customer][stage]["Stage_choices"]} " 
-                echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"  
-                     
-        
+    return{ 
+        echo "this is ${stage} stage"
+        echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
+        echo "Author Name is : ${config[customer][stage]["Author"]} "
+        echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
+        echo "API Endpoint is : ${config[customer][stage]["API"]} " 
+        echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"       
     }
 }
 
@@ -70,7 +66,7 @@ pipeline {
                     def config = readJSON file: 'app.json'
                     def customers = config["customers"]
                     def parallelStagesMap = customers.collectEntries {
-                        ["${it}" : performDeploymentStages(config, it, stage)]
+                        ["${it} : Deploy" : performDeploymentStages(config, it, stage)]
                     }
                 parallel parallelStagesMap
                 }
@@ -90,7 +86,7 @@ pipeline {
                     def config = readJSON file: 'app.json'
                     def customers = config["customers"]
                     def parallelStagesMap = customers.collectEntries {
-                        ["${it}" : performDeploymentStages(config, it, stage)]
+                        ["${it} : Deploy" : performDeploymentStages(config, it, stage)]
                     }
                 parallel parallelStagesMap
                 }
