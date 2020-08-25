@@ -58,7 +58,7 @@ pipeline {
             }
         }
         
-        stage('Approval !! ') {
+        stage('Approval !! Deploy : UAT ') {
             steps {
                 input message : "Approval! Deploy to UAT?" , ok: ' Deploy To UAT !'
             }
@@ -78,7 +78,7 @@ pipeline {
             }
         }
 
-        stage('Approval !! ') {
+        stage('Approval !! Deploy : Production ') {
             steps {
                 input message : "Approval! Deploy to Production?" , ok: ' Deploy To Production !'
             }
