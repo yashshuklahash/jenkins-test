@@ -6,7 +6,8 @@ def performDeploymentStages(config,customer,stage) {
         echo "Author Name is : ${config[customer][stage]["Author"]} "
         echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
         echo "API Endpoint is : ${config[customer][stage]["API"]} " 
-        echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"       
+        echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"
+        sh "sleep 5"
     }
 }
 
@@ -35,7 +36,7 @@ pipeline {
         stage('Build'){
             steps{
                 echo "This is build stage"
-                sh "sleep 10"
+                sh "sleep 5"
             }
         }
         
