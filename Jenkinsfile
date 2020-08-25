@@ -40,7 +40,7 @@ pipeline {
         stage('Build'){
             steps{
                 echo "This is build stage"
-                sh "sleep 15"
+                sh "sleep 10"
             }
         }
         
@@ -71,7 +71,7 @@ pipeline {
                     def config = readJSON file: 'app.json'
                     def customers = config["customers"]
                     def parallelStagesMap = customers.collectEntries {
-                        ["${customer} : Deploy" : performDeploymentStages(config, customer, stage)]
+                        ["${customer}" : performDeploymentStages(config, customer, stage)]
                     }
                 parallel parallelStagesMap
                 }
@@ -91,7 +91,7 @@ pipeline {
                     def config = readJSON file: 'app.json'
                     def customers = config["customers"]
                     def parallelStagesMap = customers.collectEntries {
-                        ["${customer} : Deploy" : performDeploymentStages(config, customer, stage)]
+                        ["${customer}" : performDeploymentStages(config, customer, stage)]
                     }
                 parallel parallelStagesMap
                 }
