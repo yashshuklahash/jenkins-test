@@ -1,6 +1,6 @@
 // For Every customer a separate parallel stage is configured
 def performDeploymentStages(config, String customer,String stage) {
-    return{
+    
           stage(customer)
         {
             agent any
@@ -27,7 +27,7 @@ def performDeploymentStages(config, String customer,String stage) {
                 }
             }
             
-        }
+        
        
     }
 }
