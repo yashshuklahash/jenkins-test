@@ -52,7 +52,7 @@ pipeline {
                             stage('Deploy to UAT') {
                                 
                                 steps {
-                                     checkout scm
+                                     
                                      script{
                                      def stage = "UAT"
                                      def customer = "Customer1"
@@ -95,7 +95,7 @@ pipeline {
                     stage('Deploy to UAT') {
                         
                         steps {
-                            checkout scm
+                            
                             script{
                             def customer = "Customer2" 
                             def stage = "UAT"
