@@ -13,7 +13,7 @@ def performDeploymentStages(config) {
                     echo "this is ${config} stage"}
             }
             }}
-                }}
+                }
         
 
     }
