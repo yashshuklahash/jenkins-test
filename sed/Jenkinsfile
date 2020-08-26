@@ -1,23 +1,23 @@
 // For Every customer a separate parallel stage is configured
 def performDeploymentStages(it)  {
     return {
-        stage("stage: ${it}") {
-            stages {
-                stage ('complie') {
-                    agent any
-                    steps {
-                        echo "${it} complie."
-                    }
-                }
-                stage('build') {
-                    steps {
-                        echo "${it} build."
-                    }
-                }
-             }
-         }
+       performDeploymentStagest()
      }
  }
+
+
+def performDeploymentStagest() {
+    stage("build") {
+        echo "Building the app "
+    }
+    stage("deploy") {
+        echo "Deploying the ap"
+    }
+    stage("test") {
+        echo "Testing the app "
+    }
+}
+
 
 // jenkins pipeline job
 pipeline {
