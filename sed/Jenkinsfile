@@ -4,14 +4,14 @@ def performDeploymentStages(it)  {
         stage("stage: ${it}") {
             stages {
                 stage ('complie') {
-                    agent xxx
+                    agent any
                     steps {
                         echo "${it} complie."
                     }
                 }
                 stage('build') {
                     steps {
-                        echo “${it} build."
+                        echo "${it} build."
                     }
                 }
              }
