@@ -21,7 +21,7 @@ def performDeploymentStages(it) {
           }
         }
 }
-
+}
 
 // jenkins pipeline job
 pipeline {
