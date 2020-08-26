@@ -1,7 +1,9 @@
 // For Every customer a separate parallel stage is configured
 def performDeploymentStages(config, String customer,stage) {
     return{
-          
+          stage(customer)
+        {
+            agent any
             stages{
                 stage("1"){
                      echo "this is ${stage} stage"
@@ -23,7 +25,7 @@ def performDeploymentStages(config, String customer,stage) {
                       sh "sleep 5"
                 
                 }
-            
+            }
             
         }
        
