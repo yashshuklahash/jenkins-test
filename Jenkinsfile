@@ -50,14 +50,17 @@ pipeline {
                     agent any
                         stages {
                             stage('Deploy to UAT') {
-                                def stage = "UAT"
+                                
                                 steps {
+                                     script{
+                                     def stage = "UAT"
                                      def customer = "Customer1"
                                      echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
                                      echo "Author Name is : ${config[customer][stage]["Author"]} "
                                      echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
                                      echo "API Endpoint is : ${config[customer][stage]["API"]} " 
                                      echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"
+                                    }
                                 }
                             }
                             stage('Deploy to Prod') {
@@ -66,13 +69,16 @@ pipeline {
                                 }                             
                                 
                                 steps {
+                                    script{
                                      def stage = "Prod"
+                                     def customer = "Customer1"
                                      input message : 'Deploy To Prod ?' , ok : "Approve !"
                                      echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
                                      echo "Author Name is : ${config[customer][stage]["Author"]} "
                                      echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
                                      echo "API Endpoint is : ${config[customer][stage]["API"]} " 
                                      echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"
+                                    }
                                 }
                                  
                             }
@@ -86,6 +92,7 @@ pipeline {
                     stage('Deploy to UAT') {
                         
                         steps {
+                            script{
                             def customer = "Customer2" 
                             def stage = "UAT"
                             echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
@@ -93,6 +100,7 @@ pipeline {
                             echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
                             echo "API Endpoint is : ${config[customer][stage]["API"]} " 
                             echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"
+                            }
                          }
                     }
                     stage('Deploy to Prod') {
@@ -101,13 +109,16 @@ pipeline {
                         }
                         
                         steps {
+                            script{
                             def stage = "Prod"
+                            def customer = "Customer2" 
                             input message : 'Deploy To Prod ?' , ok : "Approve !"
                             echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
                             echo "Author Name is : ${config[customer][stage]["Author"]} "
                             echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
                             echo "API Endpoint is : ${config[customer][stage]["API"]} " 
                             echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"
+                            }
                         }
                     }
                     stage('Automated tests') {
