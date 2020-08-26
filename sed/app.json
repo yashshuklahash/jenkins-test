@@ -1,0 +1,99 @@
+{
+  "customers" : ["Customer1" , "Customer2" , "Customer3"],
+  "Project_Name" : "Test Project" ,
+  "Author" : "yash" ,
+  "S3_Bucket" : "s3://test_bucket/" ,
+  "API" : "test API" ,
+  "Stage" : "Prod" ,
+  "HA" : "true" ,
+  "Stage_choices" : "Dev\nTest\nPreprod\nProd" ,
+  "Customer1" : {
+    "Dev" : {
+      "Project_Name" : "Test Project" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test API" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "UAT" : {
+      "Project_Name" : "Test Project" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test API" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "Prod" : {
+      "Project_Name" : "Test Project" ,
+      "Author" : "yash1" ,
+      "S3_Bucket" : "s3://test_bucket-prod-cust1" ,
+      "API" : "test-prod-cust-1" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    }
+   } ,
+  
+  "Customer2" : {
+    "Dev" : {
+      "Project_Name" : "Test Project" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test-prod-cust-3" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "UAT" : {
+      "Project_Name" : "Test Project" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test API" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "Prod" : {
+      "Project_Name" : "Customer-2-prod" ,
+      "Author" : "yash2" ,
+      "S3_Bucket" : "s3://test_bucket-prod-cust2" ,
+      "API" : "test-prod-cust-2" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    }
+   } ,
+
+  "Customer3" : {
+    "Dev" : {
+      "Project_Name" : "Customer-3-dev" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test API" ,
+      "Stage" : "Dev" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "UAT" : {
+      "Project_Name" : "Customer-3-UAT" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test API" ,
+      "Stage" : "UAT" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "Prod" : {
+      "Project_Name" : "Customer-3-prod" ,
+      "Author" : "yash3" ,
+      "S3_Bucket" : "s3://test_bucket-prod-cust3" ,
+      "API" : "test-prod-cust-3" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    }
+   }
+}
