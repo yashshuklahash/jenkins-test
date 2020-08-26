@@ -34,8 +34,8 @@ def performDeploymentStages(config, customer, stage) {
 
 
 // jenkins pipeline job
-pipeline {
-    agent any
+node {
+    
     
     environment {
         def config = readJSON file: 'app.json'
