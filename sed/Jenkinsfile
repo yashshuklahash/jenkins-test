@@ -5,14 +5,15 @@ def performDeploymentStages(config) {
             
                 script{
         stage("${config} stage"){
-            stages{
+            steps{
+                script{
                 stage("uat"){
                     echo "this is ${config} stage"}
                  stage("prod"){
                     echo "this is ${config} stage"}
             }
-                }
-            }
+            }}
+                }}
         
 
     }
@@ -43,7 +44,7 @@ pipeline {
         stage('Build'){
             steps{
                 echo "This is build stage"
-                sh "sleep 5"
+               
             }
         }
         
@@ -75,8 +76,11 @@ pipeline {
                     def customers = config["customers"]
                     def parallelStagesMap = customers.collectEntries {
                         ["${it} : Deploy" : performDeploymentStages(it)]
+                        
+                      
                     }
-                parallel parallelStagesMap
+                     parallel parallelStagesMap
+               
                 }
             }
         }
