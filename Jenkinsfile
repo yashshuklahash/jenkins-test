@@ -97,25 +97,8 @@ pipeline {
                 }
             }
         }
+    
 
-        stage('Approval !! Deploy : Production ') {
-            steps {
-                input message : "Approval! Deploy to Production?" , ok: ' Deploy To Production !'
-            }
-        }        
-
-        stage('Deploy : Production Stage') {
-            steps {
-                script {
-                    def stage = "Prod"
-                    def config = readJSON file: 'app.json'
-                    def customers = config["customers"]
-                    def parallelStagesMap = customers.collectEntries {
-                        ["${it} : Deploy" : performDeploymentStages(config, it, stage)]
-                    }
-                parallel parallelStagesMap
-                }
-            }
-        }
+        
     }
 }
