@@ -1,5 +1,4 @@
-// For Every customer a separate parallel stage is configured
-@NonCPS
+// For Every customer a separate parallel stage is configure
 def performDeploymentStages(config, customer, stage) {
     
           stage(customer)
@@ -35,12 +34,8 @@ def performDeploymentStages(config, customer, stage) {
 
 
 // jenkins pipeline job
-pipeline {
+node {
     agent any
-    
-    options {
-    skipStagesAfterUnstable()
-    }
     
     environment {
         def config = readJSON file: 'app.json'
