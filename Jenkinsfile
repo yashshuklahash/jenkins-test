@@ -1,5 +1,5 @@
 // For Every customer a separate parallel stage is configured
-def performDeploymentStages(config, customer, stage) {
+def performDeploymentStages(config, customer, stage, closure) {
     
           stage(customer)
         {
