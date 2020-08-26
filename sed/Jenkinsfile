@@ -1,5 +1,5 @@
 // For Every customer a separate parallel stage is configured
-def performDeploymentStages(config) {
+def performDeploymentStages(it) {
     return{
         stage('Decon') {
           agent any
