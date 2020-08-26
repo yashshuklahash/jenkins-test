@@ -1,5 +1,6 @@
 // For Every customer a separate parallel stage is configured
-def performDeploymentStages(config, customer, stage, closure) {
+@NonCPS
+def performDeploymentStages(config, customer, stage) {
     
           stage(customer)
         {
