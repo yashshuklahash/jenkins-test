@@ -95,7 +95,7 @@
       "HA" : "true" ,
       "Stage_choices" : "Dev\nTest\nPreprod\nProd"
     }
-   }
+   } ,
     "mcd" : {
     "Dev" : {
       "Project_Name" : "mcd-dev" ,
@@ -115,7 +115,7 @@
       "HA" : "true" ,
       "Stage_choices" : "Dev\nTest\nPreprod\nProd"
     } ,
-    "mcd" : {
+    "Prod" : {
       "Project_Name" : "mcd-prod" ,
       "Author" : "yash3" ,
       "S3_Bucket" : "s3://test_bucket-prod-cust3" ,
