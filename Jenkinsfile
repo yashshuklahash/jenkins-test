@@ -30,7 +30,7 @@ pipeline {
             steps { 
                 input message : "deploy to Dev ? " , ok : "Approve !"
                 script{
-                    //def config = readJSON file: 'app.json'  
+                    def config = readJSON file: 'app.json'  
                     echo "Project Name is : ${config.Project_Name} "
                     echo "Author Name is : ${config.Author}"
                     echo "S3 Bucket URL is : ${config.S3_Bucket} " 
@@ -45,7 +45,7 @@ pipeline {
         stage('Customer Deploys'){
             parallel {
                 stage('Customer 1') {
-                    //def config = readJSON file: 'app.json'
+                    def config = readJSON file: 'app.json'
                     
                     agent any
                         stages {
@@ -87,7 +87,7 @@ pipeline {
             }
             stage('Customer 2') {
                 agent any
-               // def config = readJSON file: 'app.json'
+                def config = readJSON file: 'app.json'
                                
                 stages {
                     stage('Deploy to UAT') {
