@@ -85,7 +85,7 @@ pipeline {
                     def customers = config["customers"]
                     def parallelStagesMap = [:]
                     for (f in customers) {
-                    tests["${f}"] = {
+                    parallelStagesMap["${f}"] = {
                     node {
                       stage("${f}") {
                               echo '${f}'
