@@ -34,7 +34,7 @@ def performDeploymentStages(config, customer, stage) {
 
 
 // jenkins pipeline job
-node {
+pipeline {
     agent any
     
     environment {
@@ -83,10 +83,17 @@ node {
                     def stage = "UAT"
                     def config = readJSON file: 'app.json'
                     def customers = config["customers"]
-                    def parallelStagesMap = customers.collectEntries {
-                        ["${it} : Deploy" : performDeploymentStages(config, it, stage)]
+                    def parallelStagesMap = [:]
+                    for (f in customers) {
+                    tests["${f}"] = {
+                    node {
+                      stage("${f}") {
+                              echo '${f}'
+                      }
                     }
-                parallel parallelStagesMap
+                  }
+                   }
+                  parallel parallelStagesMap
                 }
             }
         }
