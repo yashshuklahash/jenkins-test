@@ -45,13 +45,14 @@ pipeline {
         stage('Customer Deploys'){
             parallel {
                 stage('Customer 1') {
-                    def config = readJSON file: 'app.json'
-                    def customer = "Customer1"
+                    //def config = readJSON file: 'app.json'
+                    
                     agent any
                         stages {
                             stage('Deploy to UAT') {
                                 def stage = "UAT"
                                 steps {
+                                     def customer = "Customer1"
                                      echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
                                      echo "Author Name is : ${config[customer][stage]["Author"]} "
                                      echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
@@ -63,8 +64,9 @@ pipeline {
                                 when {
                                     branch 'master'
                                 }                             
-                                def stage = "Prod"
+                                
                                 steps {
+                                     def stage = "Prod"
                                      input message : 'Deploy To Prod ?' , ok : "Approve !"
                                      echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
                                      echo "Author Name is : ${config[customer][stage]["Author"]} "
@@ -78,12 +80,14 @@ pipeline {
             }
             stage('Customer 2') {
                 agent any
-                def config = readJSON file: 'app.json'
-                def customer = "Customer2"                
+               // def config = readJSON file: 'app.json'
+                               
                 stages {
                     stage('Deploy to UAT') {
-                        def stage = "UAT"
+                        
                         steps {
+                            def customer = "Customer2" 
+                            def stage = "UAT"
                             echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
                             echo "Author Name is : ${config[customer][stage]["Author"]} "
                             echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
@@ -95,8 +99,9 @@ pipeline {
                         when {
                             anyOf { branch 'master'; branch 'Jenkins-pipe-test' }
                         }
-                        def stage = "Prod"
+                        
                         steps {
+                            def stage = "Prod"
                             input message : 'Deploy To Prod ?' , ok : "Approve !"
                             echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
                             echo "Author Name is : ${config[customer][stage]["Author"]} "
