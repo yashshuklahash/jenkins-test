@@ -1,41 +1,10 @@
-// For Every customer a separate parallel stage is configure
-def performDeploymentStages(config, customer, stage) {
-    
-          stage(customer)
-        {
-            agent any
-            stages{
-                stage("1"){
-                     echo "this is ${stage} stage"
-                      echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
-                      echo "Author Name is : ${config[customer][stage]["Author"]} "
-                      echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
-                      echo "API Endpoint is : ${config[customer][stage]["API"]} " 
-                      echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"
-                      sh "sleep 5"
-                
-                }
-                stage("2"){
-                     echo "this is ${stage} stage"
-                      echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
-                      echo "Author Name is : ${config[customer][stage]["Author"]} "
-                      echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
-                      echo "API Endpoint is : ${config[customer][stage]["API"]} " 
-                      echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"
-                      sh "sleep 5"
-                
-                }
-            }
-            
-        
-       
-    }
-}
-
-
 // jenkins pipeline job
-node {
+pipeline {
+    agent any
     
+    options {
+    skipStagesAfterUnstable()
+    }
     
     environment {
         def config = readJSON file: 'app.json'
@@ -57,8 +26,9 @@ node {
             }
         }
         
-        stage('Deploy : Test Stage') {
-            steps {    
+        stage('Dev Stage') {
+            steps { 
+                input message : "deploy to Dev ? " , ok : "Approve !"
                 script{
                     def config = readJSON file: 'app.json'  
                     echo "Project Name is : ${config.Project_Name} "
@@ -71,34 +41,82 @@ node {
             }
         }
         
-        stage('Approval !! Deploy : UAT ') {
-            steps {
-                input message : "Approval! Deploy to UAT?" , ok: ' Deploy To UAT !'
-            }
-        }
         
-        stage('Deploy : UAT Stage') {
-            steps {
-                script {
-                    def stage = "UAT"
+        stage('Customer Deploys'){
+            parallel {
+                stage('Customer 1') {
                     def config = readJSON file: 'app.json'
-                    def customers = config["customers"]
-                    def parallelStagesMap = [:]
-                    for (f in customers) {
-                    parallelStagesMap["${f}"] = {
-                    node {
-                      stage("${f}") {
-                              echo '${f}'
-                      }
+                    def customer = "Customer1"
+                    agent any
+                        stages {
+                            stage('Deploy to UAT') {
+                                def stage = "UAT"
+                                steps {
+                                     echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
+                                     echo "Author Name is : ${config[customer][stage]["Author"]} "
+                                     echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
+                                     echo "API Endpoint is : ${config[customer][stage]["API"]} " 
+                                     echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"
+                                }
+                            }
+                            stage('Deploy to Prod') {
+                                when {
+                                    branch 'master'
+                                }                             
+                                def stage = "Prod"
+                                steps {
+                                     input message : 'Deploy To Prod ?' , ok : "Approve !"
+                                     echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
+                                     echo "Author Name is : ${config[customer][stage]["Author"]} "
+                                     echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
+                                     echo "API Endpoint is : ${config[customer][stage]["API"]} " 
+                                     echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"
+                                }
+                                 
+                            }
                     }
-                  }
-                   }
-                  parallel parallelStagesMap
+            }
+            stage('Customer 2') {
+                agent any
+                def config = readJSON file: 'app.json'
+                def customer = "Customer2"                
+                stages {
+                    stage('Deploy to UAT') {
+                        def stage = "UAT"
+                        steps {
+                            echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
+                            echo "Author Name is : ${config[customer][stage]["Author"]} "
+                            echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
+                            echo "API Endpoint is : ${config[customer][stage]["API"]} " 
+                            echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"
+                         }
+                    }
+                    stage('Deploy to Prod') {
+                        when {
+                            anyOf { branch 'master'; branch 'Jenkins-pipe-test' }
+                        }
+                        def stage = "Prod"
+                        steps {
+                            input message : 'Deploy To Prod ?' , ok : "Approve !"
+                            echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
+                            echo "Author Name is : ${config[customer][stage]["Author"]} "
+                            echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
+                            echo "API Endpoint is : ${config[customer][stage]["API"]} " 
+                            echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"
+                        }
+                    }
+                    stage('Automated tests') {
+                        when {
+                            anyOf { branch 'master'; branch 'Jenkins-pipe-test' }
+                        }
+                        steps {
+                            sh 'echo "Testing"'
+                        }
+                    }
                 }
             }
         }
-    
-
-        
+    }
+     
     }
 }
