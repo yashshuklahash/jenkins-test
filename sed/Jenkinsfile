@@ -62,7 +62,7 @@ pipeline {
                     def config = readJSON file: 'app.json'
                     def customers = config["customers"]
                     def parallelStagesMap = customers.collectEntries {
-                        ["${it} : Deploy" : performDeploymentStages(it, stage)]
+                        ["${it} : Deploy" : performDeploymentStages(it)]
                     }
                 parallel parallelStagesMap
                 }
