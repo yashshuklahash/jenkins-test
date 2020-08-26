@@ -45,7 +45,7 @@ pipeline {
         stage('Customer Deploys'){
             parallel {
                 stage('Customer 1') {
-                    def config = readJSON file: 'app.json'
+                    //def config = readJSON file: 'app.json'
                     
                     agent any
                         stages {
