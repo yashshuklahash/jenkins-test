@@ -14,7 +14,7 @@ pipeline{
 
 def doDynamicParallelSteps(){
   tests = [:]
-  for (f in ) {
+  for (f in cust) {
     tests["${f}"] = {
       node {
         stage("${f}") {
