@@ -67,7 +67,7 @@ pipeline {
                             }
                             stage('Deploy to Prod') {
                                 when {
-                                    branch 'master'
+                                    ${env.BRANCH_NAME} == 'master'
                                 }                             
                                 
                                 steps {
