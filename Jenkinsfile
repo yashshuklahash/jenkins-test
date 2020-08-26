@@ -1,13 +1,32 @@
 // For Every customer a separate parallel stage is configured
 def performDeploymentStages(config,customer,stage) {
-    return{ 
-        echo "this is ${stage} stage"
-        echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
-        echo "Author Name is : ${config[customer][stage]["Author"]} "
-        echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
-        echo "API Endpoint is : ${config[customer][stage]["API"]} " 
-        echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"
-        sh "sleep 5"
+    return{
+        stage("${customer}"){
+            stages{
+                stage("1"){
+                     echo "this is ${stage} stage"
+                      echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
+                      echo "Author Name is : ${config[customer][stage]["Author"]} "
+                      echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
+                      echo "API Endpoint is : ${config[customer][stage]["API"]} " 
+                      echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"
+                      sh "sleep 5"
+                
+                }
+                stage("2"){
+                     echo "this is ${stage} stage"
+                      echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
+                      echo "Author Name is : ${config[customer][stage]["Author"]} "
+                      echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
+                      echo "API Endpoint is : ${config[customer][stage]["API"]} " 
+                      echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"
+                      sh "sleep 5"
+                
+                }
+            
+            }
+        }
+       
     }
 }
 
