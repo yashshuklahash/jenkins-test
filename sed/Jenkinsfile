@@ -16,12 +16,14 @@ def proceed() {
 }
 
 def performDeploymentStagest() {
+    stages{
     stage("build") {
         echo "Building the app build"
     }
 
     stage("test") {
         echo "Testing the app test"
+    }
     }
 }
 def performDeploymentStagese() {
