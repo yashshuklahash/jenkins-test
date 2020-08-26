@@ -87,7 +87,7 @@ pipeline {
             }
             stage('Customer 2') {
                 agent any
-                def config = readJSON file: 'app.json'
+               // def config = readJSON file: 'app.json'
                                
                 stages {
                     stage('Deploy to UAT') {
