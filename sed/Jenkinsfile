@@ -8,13 +8,13 @@ def performDeploymentStages(it)  {
 
 def performDeploymentStagest() {
     stage("build") {
-        echo "Building the app "
+        echo "Building the app build"
     }
     stage("deploy") {
-        echo "Deploying the ap"
+        echo "Deploying the app deploy"
     }
     stage("test") {
-        echo "Testing the app "
+        echo "Testing the app test"
     }
 }
 
