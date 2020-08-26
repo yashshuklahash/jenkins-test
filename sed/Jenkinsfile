@@ -2,6 +2,7 @@
 def performDeploymentStages(it)  {
     return {
        performDeploymentStagest()
+       performDeploymentStagese()
      }
  }
 
@@ -10,14 +11,18 @@ def performDeploymentStagest() {
     stage("build") {
         echo "Building the app build"
     }
-    stage("deploy") {
-        echo "Deploying the app deploy"
-    }
+
     stage("test") {
         echo "Testing the app test"
     }
 }
+def performDeploymentStagese() {
 
+    stage("deploy") {
+        echo "Deploying the app deploy"
+    }
+
+}
 
 // jenkins pipeline job
 pipeline {
