@@ -1,22 +1,25 @@
 // For Every customer a separate parallel stage is configured
 def performDeploymentStages(config) {
     return{
-        
-            
-                script{
-        stage("${config} stage"){
-            steps{
-                script{
-                stage("uat"){
-                    echo "this is ${config} stage"}
-                 stage("prod"){
-                    echo "this is ${config} stage"}
+        stage('Decon') {
+          agent any
+          stages {
+            stage('Deploy to UAT') {
+              steps {
+                sh 'echo "deploy to uat"'
+              }
             }
-            }}
-                }
-        
-
-    }
+            stage('Deploy to Prod') {
+              when {
+                branch 'master'
+              }
+              steps {
+                input 'Deploy?'
+                sh 'echo "Deploy to Prod"'
+              }
+            }
+          }
+        }
 }
 
 
