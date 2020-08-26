@@ -13,16 +13,19 @@ pipeline{
 }
 
 def doDynamicParallelSteps(){
-  def cust = ["sdfg","kiuyfcvbn","sdfgfgh","zfhj"]
+  def cust = ["cust1","cust2","cust3","cust4"]
   tests = [:]
   for (f in cust) {
     tests["${f}"] = {
       node {
-        stage("${f}") {
-          echo '${f}'
+        stage("build") {
+          echo "${f}"
         }
-        stage("gjyjguig") {
-          echo '${f} uihuoho'
+        stage("deploy") {
+          echo "${f} uihuoho"
+        }
+        stage("test") {
+          echo "${f} uihuoho"
         }
       }
     }
