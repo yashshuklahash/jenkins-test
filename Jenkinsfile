@@ -30,7 +30,7 @@ pipeline {
             steps { 
                 input message : "deploy to Dev ? " , ok : "Approve !"
                 script{
-                    def config = readJSON file: 'app.json'  
+                    //def config = readJSON file: 'app.json'  
                     echo "Project Name is : ${config.Project_Name} "
                     echo "Author Name is : ${config.Author}"
                     echo "S3 Bucket URL is : ${config.S3_Bucket} " 
