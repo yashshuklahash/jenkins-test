@@ -56,6 +56,7 @@ pipeline {
                                      script{
                                      def stage = "UAT"
                                      def customer = "Customer1"
+                                     def config = readJSON file: 'app.json'
                                      echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
                                      echo "Author Name is : ${config[customer][stage]["Author"]} "
                                      echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
@@ -73,6 +74,7 @@ pipeline {
                                     script{
                                      def stage = "Prod"
                                      def customer = "Customer1"
+                                     def config = readJSON file: 'app.json'
                                      input message : 'Deploy To Prod ?' , ok : "Approve !"
                                      echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
                                      echo "Author Name is : ${config[customer][stage]["Author"]} "
@@ -97,6 +99,7 @@ pipeline {
                             script{
                             def customer = "Customer2" 
                             def stage = "UAT"
+                            def config = readJSON file: 'app.json'
                             echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
                             echo "Author Name is : ${config[customer][stage]["Author"]} "
                             echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
@@ -114,6 +117,7 @@ pipeline {
                             script{
                             def stage = "Prod"
                             def customer = "Customer2" 
+                            def config = readJSON file: 'app.json'
                             input message : 'Deploy To Prod ?' , ok : "Approve !"
                             echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
                             echo "Author Name is : ${config[customer][stage]["Author"]} "
