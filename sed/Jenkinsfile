@@ -1,7 +1,11 @@
 // For Every customer a separate parallel stage is configured
 def performDeploymentStages(config) {
-    return{ 
-        echo "this is ${config} stage"
+    return{
+        stage("${config} stage"){
+            steps{
+            echo "this is ${config} stage"
+            }
+        }
 
     }
 }
