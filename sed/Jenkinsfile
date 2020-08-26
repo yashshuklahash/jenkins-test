@@ -2,7 +2,7 @@
 def performDeploymentStages(it) {
     return{
         stage('Decon') {
-          agent any
+          
           stages {
             stage('Deploy to UAT') {
               steps {
