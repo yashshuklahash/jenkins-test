@@ -1,3 +1,4 @@
+def cust = ["sdfg","kiuyfcvbn","sdfgfgh","zfhj"]
 pipeline{
   agent any
   stages{
@@ -13,7 +14,7 @@ pipeline{
 
 def doDynamicParallelSteps(){
   tests = [:]
-  for (f in findFiles(glob: '**/html/*.html')) {
+  for (f in ) {
     tests["${f}"] = {
       node {
         stage("${f}") {
