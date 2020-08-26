@@ -1,27 +1,23 @@
 // For Every customer a separate parallel stage is configured
-def performDeploymentStages(it) {
-    return{
-        stage('Decon') {
-          
-          stages {
-            stage('Deploy to UAT') {
-              steps {
-                sh 'echo "deploy to uat"'
-              }
-            }
-            stage('Deploy to Prod') {
-              when {
-                branch 'master'
-              }
-              steps {
-                input 'Deploy?'
-                sh 'echo "Deploy to Prod"'
-              }
-            }
-          }
-        }
-}
-}
+def performDeploymentStages(it)  {
+    return {
+        stage("stage: ${it}") {
+            stages {
+                stage ('complie') {
+                    agent xxx
+                    steps {
+                        echo "${it} complie."
+                    }
+                }
+                stage(‘build') {
+                    steps {
+                        echo “${it} build."
+                    }
+                }
+             }
+         }
+     }
+ }
 
 // jenkins pipeline job
 pipeline {
