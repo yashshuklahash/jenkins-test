@@ -2,13 +2,13 @@
 def performDeploymentStages(config) {
     return{
         
-            steps{
+            
                 script{
         stage("${config} stage"){
             echo "this is ${config} stage"
                 }
             }
-        }
+        
 
     }
 }
