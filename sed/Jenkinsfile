@@ -1,4 +1,4 @@
-def cust = ["sdfg","kiuyfcvbn","sdfgfgh","zfhj"]
+
 pipeline{
   agent any
   stages{
@@ -13,6 +13,7 @@ pipeline{
 }
 
 def doDynamicParallelSteps(){
+  def cust = ["sdfg","kiuyfcvbn","sdfgfgh","zfhj"]
   tests = [:]
   for (f in cust) {
     tests["${f}"] = {
