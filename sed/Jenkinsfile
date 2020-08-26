@@ -1,11 +1,11 @@
 // For Every customer a separate parallel stage is configured
 def performDeploymentStages(it)  {
     return {
-       input deploy ?
+       input "deploy ?"
        performDeploymentStagest()
-       input deploy ?
+       input "deploy ?"
        performDeploymentStagese()
-       input deploy ?
+       input "deploy ?"
        performDeploymentStagesy()
      }
  }
