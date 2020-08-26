@@ -8,7 +8,7 @@
   "HA" : "true" ,
   "Stage_choices" : "Dev\nTest\nPreprod\nProd" ,
   "decon" : {
-    "Dep_Prod" : 1 ,
+    "Dep_Prod" : "1" ,
     "Automated_Test" : 1 ,    
     "Dev" : {
       "Project_Name" : "decon-dev" ,
@@ -40,7 +40,7 @@
    } ,
   
   "irby" : {
-    "Dep_Prod" : 1 ,
+    "Dep_Prod" : "1" ,
     "Automated_Test" : 0 ,   
     "Dev" : {
       "Project_Name" : "irby -dev" ,
@@ -72,7 +72,7 @@
    } ,
 
   "kfc" : {
-    "Dep_Prod" : 0 ,
+    "Dep_Prod" : "0" ,
     "Automated_Test" : 1 ,   
     "Dev" : {
       "Project_Name" : "kfc-dev" ,
@@ -103,7 +103,7 @@
     }
    } ,
     "mcd" : {
-    "Dep_Prod" : 1 ,
+    "Dep_Prod" : "1" ,
     "Automated_Test" : 1 ,   
     "Dev" : {
       "Project_Name" : "mcd-dev" ,
