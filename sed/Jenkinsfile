@@ -18,6 +18,7 @@ def doDynamicParallelSteps(){
   for (f in cust) {
     tests["${f}"] = {
       node {
+        stages{
         stage("build") {
           echo "${f}"
         }
@@ -27,6 +28,7 @@ def doDynamicParallelSteps(){
         stage("test") {
           echo "${f} uihuoho"
         }
+      }
       }
     }
   }
