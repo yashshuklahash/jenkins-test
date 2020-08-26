@@ -1,13 +1,13 @@
 // For Every customer a separate parallel stage is configured
 def performDeploymentStages(it)  {
     return {
-        script{
+       
        performDeploymentStagest()
        proceed()
        performDeploymentStagese()
        proceed()
        performDeploymentStagesy()
-        }
+       
      }
  }
 
