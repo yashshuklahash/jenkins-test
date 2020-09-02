@@ -1,0 +1,47 @@
+{
+"irby" : {
+    "common-param" : "val" ,
+    "Dep_Prod" : "1" ,
+    "Automated_Test" : 0 ,   
+    "Dev" : {
+      "Project_Name" : "irby -dev" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test-prod-cust-3" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "UAT" : {
+      "Project_Name" : "irby - UAT" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test API" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "Prod" : {
+      "server_prod" : ["server1","server2"],
+      "Project_Name" : "irby - Prod" ,
+      "Author" : "yash2" ,
+      "S3_Bucket" : "s3://test_bucket-prod-cust2" ,
+      "API" : "test-prod-cust-2" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd" ,
+      "servers" : {
+        "server1" : {
+            "param1" : "val1" ,
+            "param2" : "val2" ,
+            "param3" : "val3" 
+        } ,
+        "server2" : {
+            "param1" : "val1" ,
+            "param2" : "val2" ,
+            "param3" : "val3" 
+        }
+    }
+    }
+   } 
+}

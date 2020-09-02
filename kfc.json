@@ -1,0 +1,58 @@
+{
+"kfc" : {
+    "common-param" : "val" ,
+    "Dep_Prod" : "0" ,
+    "Automated_Test" : 1 ,   
+    "Dev" : {
+      "Project_Name" : "kfc-dev" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test API" ,
+      "Stage" : "Dev" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "UAT" : {
+      "Project_Name" : "kfc-UAT" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test API" ,
+      "Stage" : "UAT" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "Prod" : {
+      "server_prod" : ["server1","server2","server3","server4"],
+      "Project_Name" : "kfc-prod" ,
+      "Author" : "yash3" ,
+      "S3_Bucket" : "s3://test_bucket-prod-cust3" ,
+      "API" : "test-prod-cust-3" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd",
+      "servers" : {
+        "server1" : {
+            "param1" : "val1" ,
+            "param2" : "val2" ,
+            "param3" : "val3" 
+        } ,
+        "server2" : {
+            "param1" : "val1" ,
+            "param2" : "val2" ,
+            "param3" : "val3" 
+        } ,
+        "server3" : {
+            "param1" : "val1" ,
+            "param2" : "val2" ,
+            "param3" : "val3" 
+        } ,
+        "server4" : {
+            "param1" : "val1" ,
+            "param2" : "val2" ,
+            "param3" : "val3" 
+        }
+    }
+    }
+   } 
+}  
+    

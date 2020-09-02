@@ -1,0 +1,51 @@
+{
+    "common-param" : "val" ,
+    "Dep_Prod" : "1" ,
+    "Automated_Test" : 1 ,    
+    "Dev" : {
+        "Project_Name" : "decon-dev" ,
+        "Author" : "yash" ,
+        "S3_Bucket" : "s3://test_bucket/" ,
+        "API" : "test API" ,
+        "Stage" : "Prod" ,
+        "HA" : "true" ,
+        "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "UAT" : {
+        "Project_Name" : "decon-UAT" ,
+        "Author" : "yash" ,
+        "S3_Bucket" : "s3://test_bucket/" ,
+        "API" : "test API" ,
+        "Stage" : "Prod" ,
+        "HA" : "true" ,
+        "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "Prod" : {
+        "server_prod" : ["server1","server2","server3"],
+        "Project_Name" : "decon-prod" ,
+        "Author" : "yash1" ,
+        "S3_Bucket" : "s3://test_bucket-prod-cust1" ,
+        "API" : "test-prod-cust-1" ,
+        "Stage" : "Prod" ,
+        "HA" : "true" ,
+        "Stage_choices" : "Dev\nTest\nPreprod\nProd" ,
+        "servers" : {
+            "server1" : {
+                "param1" : "val1" ,
+                "param2" : "val2" ,
+                "param3" : "val3" 
+            } ,
+            "server2" : {
+                "param1" : "val1" ,
+                "param2" : "val2" ,
+                "param3" : "val3" 
+            } ,
+            "server3" : {
+                "param1" : "val1" ,
+                "param2" : "val2" ,
+                "param3" : "val3" 
+            }
+        }
+    }
+
+}
