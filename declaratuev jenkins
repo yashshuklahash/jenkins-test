@@ -1,0 +1,78 @@
+
+
+def doParallelDeploys(config , customer){
+        
+    return {
+            node {
+                stage("Deploy to UAT") {
+                    stage = "UAT"
+                    project = config[customer][stage]["Project_Name"]
+                    echo "Project Name is : ${project}"
+                    echo "Author Name is : ${config[customer][stage]["Author"]} "
+                    echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
+                    echo "API Endpoint is : ${config[customer][stage]["API"]} " 
+                    echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"
+                }
+                if (config[customer]["Dep_Prod"] == '1') {
+                    stage("Deploy to Prod") {
+                        input message : "Deploy to Prod ?" , ok : "Approve!"
+                        stage = "Prod"
+                        echo "Project Name is : ${config[customer][stage]["Project_Name"]}"
+                        echo "Author Name is : ${config[customer][stage]["Author"]} "
+                        echo "S3 Bucket URL is : ${config[customer][stage]["S3_Bucket"]} " 
+                        echo "API Endpoint is : ${config[customer][stage]["API"]} " 
+                        echo "Is Deployment HighAvailale ? : ${config[customer][stage]["HA"]}"
+                    }
+                }
+
+                if (config[customer]["Automated_Test"] == 1) {
+                    stage('Automated tests') {
+                        sh 'echo "Testing"'
+                    }
+                }
+
+            }
+        }
+    }
+  
+
+
+node {
+    
+
+    stage("checkout SCM"){
+        git branch: 'master', url: 'https://github.com/yashshuklahash/jenkins-test.git'
+    }
+    
+    config = readJSON file: 'app.json' 
+
+    stage('Build Stage'){
+        echo "This is build stage"
+        sh "sleep 5"   
+    }
+
+
+
+    stage('Customer Deploys') {
+        customers = config.customers 
+        customer_deploy = [:]
+        customers_parameters = [:]
+        for (customer in customers) {
+            file1 = "${customer}.json"
+            customers_parameters[customer] =  readJSON file: file1
+        }
+
+        for (customer in customers) {
+            customer_deploy["${customer}"] =  doParallelDeploys(config , customer) 
+        }
+        echo "${customer_deploy}"
+        parallel customer_deploy
+        
+    
+
+
+}
+
+}
+
+
