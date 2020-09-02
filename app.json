@@ -6,10 +6,131 @@
   "API" : "test API" ,
   "Stage" : "Prod" ,
   "HA" : "true" ,
- 
-   
+  "Stage_choices" : "Dev\nTest\nPreprod\nProd" ,
+  "decon" : {
+    "Dep_Prod" : "1" ,
+    "Automated_Test" : 1 ,    
+    "Dev" : {
+      "Project_Name" : "decon-dev" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test API" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "UAT" : {
+      "Project_Name" : "decon-UAT" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test API" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "Prod" : {
+      "Project_Name" : "decon-prod" ,
+      "Author" : "yash1" ,
+      "S3_Bucket" : "s3://test_bucket-prod-cust1" ,
+      "API" : "test-prod-cust-1" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    }
+   } ,
   
- 
+  "irby" : {
+    "Dep_Prod" : "1" ,
+    "Automated_Test" : 0 ,   
+    "Dev" : {
+      "Project_Name" : "irby -dev" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test-prod-cust-3" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "UAT" : {
+      "Project_Name" : "irby - UAT" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test API" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "Prod" : {
+      "Project_Name" : "irby - Prod" ,
+      "Author" : "yash2" ,
+      "S3_Bucket" : "s3://test_bucket-prod-cust2" ,
+      "API" : "test-prod-cust-2" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    }
+   } ,
 
-
+  "kfc" : {
+    "Dep_Prod" : "0" ,
+    "Automated_Test" : 1 ,   
+    "Dev" : {
+      "Project_Name" : "kfc-dev" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test API" ,
+      "Stage" : "Dev" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "UAT" : {
+      "Project_Name" : "kfc-UAT" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test API" ,
+      "Stage" : "UAT" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "Prod" : {
+      "Project_Name" : "kfc-prod" ,
+      "Author" : "yash3" ,
+      "S3_Bucket" : "s3://test_bucket-prod-cust3" ,
+      "API" : "test-prod-cust-3" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    }
+   } ,
+    "mcd" : {
+    "Dep_Prod" : "1" ,
+    "Automated_Test" : 1 ,   
+    "Dev" : {
+      "Project_Name" : "mcd-dev" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test API" ,
+      "Stage" : "Dev" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "UAT" : {
+      "Project_Name" : "mcd-UAT" ,
+      "Author" : "yash" ,
+      "S3_Bucket" : "s3://test_bucket/" ,
+      "API" : "test API" ,
+      "Stage" : "UAT" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    } ,
+    "Prod" : {
+      "Project_Name" : "mcd-prod" ,
+      "Author" : "yash3" ,
+      "S3_Bucket" : "s3://test_bucket-prod-cust3" ,
+      "API" : "test-prod-cust-3" ,
+      "Stage" : "Prod" ,
+      "HA" : "true" ,
+      "Stage_choices" : "Dev\nTest\nPreprod\nProd"
+    }
+   }
 }
