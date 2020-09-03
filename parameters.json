@@ -1,7 +1,0 @@
-{
-    "customers" : ["decon" , "irby" , "kfc" ,"mcd"],
-    "pipeline_param1" : "val1" ,
-    "pipeline_param2" : "val2" ,
-    "pipeline_param3" : "val3"
-
-}
