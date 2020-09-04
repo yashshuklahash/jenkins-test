@@ -1,5 +1,5 @@
 {
-  "customers" : ["decon" , "irby" , "kfc" ,"mcd"],
+  "customers" : ["decon" , "irby" , "kfc" ,"mcd","lol"],
   "Project_Name" : "Test Project" ,
   "Author" : "yash" ,
   "S3_Bucket" : "s3://test_bucket/" ,
